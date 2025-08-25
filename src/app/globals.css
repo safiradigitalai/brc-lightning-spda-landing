@@ -1,8 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --radius: 1rem;
+  
+  /* Cyano Cinematográfico */
+  --primary: #00E5FF;
+  --primary-foreground: #FFFFFF;
+  --primary-light: #80D8FF;
+  --primary-dark: #00B2CC;
+  
+  /* Complementares */
+  --secondary: #F8FAFC;
+  --secondary-foreground: #1A1A1A;
+  --accent: #FF6B35;
+  --accent-foreground: #FFFFFF;
+  --success: #00C851;
+  --warning: #FFD700;
+  
+  /* Neutros Limpos */
+  --muted: #F5F5F5;
+  --muted-foreground: #6B7280;
+  --border: #E5E7EB;
+  --input: #F9FAFB;
+  --ring: #00E5FF;
+  
+  /* Gradientes Cinematográficos */
+  --gradient-primary: linear-gradient(135deg, #00E5FF 0%, #80D8FF 100%);
+  --gradient-accent: linear-gradient(135deg, #FF6B35 0%, #FFE135 100%);
+  --gradient-dark: linear-gradient(135deg, #0A0E1A 0%, #1A1F2E 100%);
+  --gradient-cyber: linear-gradient(135deg, #00E5FF 0%, #00FF94 50%, #FFE135 100%);
+  
+  /* Sombras Cinematográficas */
+  --shadow-glow: 0 0 30px rgba(0, 229, 255, 0.3);
+  --shadow-deep: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  --shadow-accent: 0 0 20px rgba(255, 107, 53, 0.4);
 }
 
 @theme inline {
@@ -14,9 +47,105 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFFFFF;
+    --foreground: #1A1A1A;
+    --primary: #00E5FF;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F8FAFC;
+    --secondary-foreground: #1A1A1A;
+    --muted: #F5F5F5;
+    --muted-foreground: #6B7280;
+    --accent: #FF6B35;
+    --accent-foreground: #FFFFFF;
+    --border: #E5E7EB;
+    --input: #F9FAFB;
+    --ring: #00E5FF;
   }
+}
+
+/* Classes Utilitárias Cinematográficas */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.gradient-cyber {
+  background: var(--gradient-cyber);
+}
+
+.glow-primary {
+  box-shadow: var(--shadow-glow);
+}
+
+.shadow-deep {
+  box-shadow: var(--shadow-deep);
+}
+
+.shadow-accent {
+  box-shadow: var(--shadow-accent);
+}
+
+/* Efeitos Cinematográficos */
+.cinematic-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.cinematic-glass {
+  background: rgba(26, 31, 46, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.text-gradient-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cinematic-border {
+  position: relative;
+}
+
+.cinematic-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  background: var(--gradient-primary);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+}
+
+/* Animações Suaves */
+.smooth-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-deep);
+}
+
+/* Grid Cinematográfico */
+.cinematic-grid {
+  background-image: 
+    linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 body {

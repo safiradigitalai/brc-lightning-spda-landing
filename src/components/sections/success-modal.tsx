@@ -57,31 +57,10 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
 
         <CardContent className="space-y-8 relative">
           
-          {/* Confirmação */}
-          <div className="bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-slate-800/60 border border-primary/30 rounded-xl p-6 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/40">
-                <Mail className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="font-bold text-white text-lg">
-                  Email de confirmação enviado
-                </h3>
-                <p className="text-slate-300 text-sm">
-                  Verifique sua caixa de entrada: <strong className="text-primary">{email}</strong>
-                </p>
-              </div>
-            </div>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Enviamos o link de download direto para seu email. 
-              Se não receber em alguns minutos, verifique a pasta de spam.
-            </p>
-          </div>
-
           {/* Download Direto */}
           <div className="text-center space-y-6">
             <h3 className="text-2xl font-bold text-white">
-              Ou baixe agora mesmo:
+              Baixe seu e-book agora:
             </h3>
             
             <Button 
@@ -129,7 +108,7 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
             <Button 
               variant="outline" 
               onClick={onClose}
-              className="h-12 px-8 text-base font-semibold border-2 border-primary/60 text-primary hover:bg-primary/10 hover:border-primary hover:shadow-[0_0_20px_rgba(0,229,255,0.5)] transition-all duration-500 backdrop-blur-sm cursor-pointer"
+              className="h-12 px-8 text-base font-semibold border-2 border-primary/60 text-primary hover:bg-primary/10 hover:border-primary hover:shadow-[0_0_20px_rgba(0,229,255,0.5)] transition-all duration-500 backdrop-blur-sm cursor-pointer bg-transparent hover:text-white"
             >
               Continuar Navegando
             </Button>

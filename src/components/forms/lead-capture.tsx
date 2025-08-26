@@ -18,6 +18,7 @@ import {
   Phone,
   Briefcase
 } from 'lucide-react';
+import { leadApi, type LeadData, type ApiResponse, type LeadResponse, handleApiError } from '@/lib/api';
 
 interface LeadCaptureProps {
   onSuccess: (email: string, name: string) => void;
@@ -32,7 +33,8 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
     lgpdConsent: false
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<{name?: string; email?: string; whatsapp?: string; role?: string; lgpdConsent?: string}>({});
+  const [errors, setErrors] = useState<{name?: string; email?: string; whatsapp?: string; role?: string; lgpdConsent?: string; api?: string}>({});
+  const [isExistingUser, setIsExistingUser] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -50,21 +52,93 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Funções de formatação
+  const formatWhatsApp = (value: string) => {
+    // Remove tudo que não é dígito
+    const numbers = value.replace(/\D/g, '');
+    
+    // Aplica a máscara (xx) xxxxx-xxxx ou (xx) xxxx-xxxx
+    if (numbers.length <= 2) {
+      return numbers;
+    } else if (numbers.length <= 7) {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+    } else if (numbers.length <= 11) {
+      const hasNinth = numbers.length > 10;
+      if (hasNinth) {
+        return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
+      } else {
+        return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 6)}-${numbers.slice(6, 10)}`;
+      }
+    } else {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
+    }
+  };
+
+  // Validação melhorada de email
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const commonDomains = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'uol.com.br', 'terra.com.br'];
+    
+    if (!emailRegex.test(email)) {
+      return 'Email deve ter um formato válido';
+    }
+    
+    // Verificar se o domínio parece válido
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (domain && domain.length < 3) {
+      return 'Domínio do email muito curto';
+    }
+    
+    return null;
+  };
+
+  // Validação de WhatsApp
+  const validateWhatsApp = (whatsapp: string) => {
+    if (!whatsapp) return null;
+    
+    const numbers = whatsapp.replace(/\D/g, '');
+    if (numbers.length < 10 || numbers.length > 11) {
+      return 'WhatsApp deve ter 10 ou 11 dígitos';
+    }
+    
+    // Verificar se o DDD é válido (11 a 99)
+    const ddd = parseInt(numbers.slice(0, 2));
+    if (ddd < 11 || ddd > 99) {
+      return 'DDD inválido';
+    }
+    
+    return null;
+  };
+
   const validateForm = () => {
     const newErrors: {name?: string; email?: string; whatsapp?: string; role?: string; lgpdConsent?: string} = {};
     
+    // Validação do nome
     if (!formData.name.trim()) {
       newErrors.name = 'Nome é obrigatório';
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Nome deve ter pelo menos 2 caracteres';
+    } else if (formData.name.trim().split(' ').length < 2) {
+      newErrors.name = 'Por favor, informe nome completo';
     }
     
+    // Validação do email
     if (!formData.email.trim()) {
       newErrors.email = 'Email é obrigatório';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email inválido';
+    } else {
+      const emailError = validateEmail(formData.email.trim());
+      if (emailError) {
+        newErrors.email = emailError;
+      }
     }
     
+    // Validação do WhatsApp
+    const whatsappError = validateWhatsApp(formData.whatsapp);
+    if (whatsappError) {
+      newErrors.whatsapp = whatsappError;
+    }
+    
+    // Validação do LGPD
     if (!formData.lgpdConsent) {
       newErrors.lgpdConsent = 'Você deve aceitar os termos para continuar';
     }
@@ -79,16 +153,72 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
     if (!validateForm()) return;
     
     setIsLoading(true);
+    setErrors(prev => ({ ...prev, api: undefined }));
     
-    // Simular envio (substituir por integração real)
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsLoading(false);
-    onSuccess(formData.email, formData.name);
+    try {
+      // Preparar dados para envio
+      const leadData: LeadData = {
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        whatsapp: formData.whatsapp.trim() || undefined,
+        role: formData.role.trim() || undefined,
+        lgpd_consent: formData.lgpdConsent,
+      };
+
+      // Enviar para API
+      const response = await leadApi.create(leadData);
+      
+      if (response.success && response.data) {
+        // Sucesso - usuário novo ou existente
+        setIsExistingUser(response.data.isExisting);
+        onSuccess(response.data.email, response.data.name);
+      } else {
+        // Erro da API
+        const errorMessage = handleApiError(response);
+        
+        // Verificar se é email ou WhatsApp duplicado
+        if (response.code === 'DUPLICATE_DATA' || response.message?.includes('já cadastrado')) {
+          // Se for WhatsApp duplicado, mostrar erro específico
+          if (response.data?.field === 'whatsapp') {
+            setErrors(prev => ({ 
+              ...prev, 
+              whatsapp: `Este WhatsApp já está cadastrado com o email: ${response.data.existingEmail}`
+            }));
+          } else {
+            // Email duplicado - permitir prosseguir
+            setIsExistingUser(true);
+            onSuccess(formData.email, formData.name);
+          }
+        } else {
+          setErrors(prev => ({ ...prev, api: errorMessage }));
+        }
+      }
+    } catch (error) {
+      console.error('Error submitting lead:', error);
+      setErrors(prev => ({ 
+        ...prev, 
+        api: 'Erro de conexão. Verifique sua internet e tente novamente.' 
+      }));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: 'name' | 'email' | 'whatsapp' | 'role', value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    let processedValue = value as string;
+    
+    // Aplicar formatação específica por campo
+    if (field === 'whatsapp' && typeof value === 'string') {
+      processedValue = formatWhatsApp(value);
+    } else if (field === 'email' && typeof value === 'string') {
+      processedValue = value.toLowerCase().trim();
+    } else if (field === 'name' && typeof value === 'string') {
+      // Capitalizar primeira letra de cada palavra
+      processedValue = value.replace(/\b\w/g, l => l.toUpperCase());
+    }
+    
+    setFormData(prev => ({ ...prev, [field]: processedValue }));
+    
     // Limpar erro quando usuário digita
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
@@ -336,6 +466,16 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                       </p>
                     )}
                   </div>
+
+                  {/* Erro da API */}
+                  {errors.api && (
+                    <div className="p-4 surface-glass border border-red-400/50 rounded-lg">
+                      <p className="text-red-400 text-sm flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                        {errors.api}
+                      </p>
+                    </div>
+                  )}
 
                   {/* CTA Button Premium */}
                   <Button 

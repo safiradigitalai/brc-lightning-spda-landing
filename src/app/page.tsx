@@ -11,6 +11,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 export default function Home() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [leadData, setLeadData] = useState({ email: '', name: '' });
+  const [formKey, setFormKey] = useState(0); // Key para forçar reset do form
   const leadCaptureRef = useRef<HTMLDivElement>(null);
 
   const handleCtaClick = () => {
@@ -30,6 +31,8 @@ export default function Home() {
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
+    // Reset o formulário incrementando a key
+    setFormKey(prev => prev + 1);
   };
 
   return (
@@ -40,7 +43,7 @@ export default function Home() {
       <Credibility />
       
       <div ref={leadCaptureRef}>
-        <LeadCapture onSuccess={handleLeadCapture} />
+        <LeadCapture key={formKey} onSuccess={handleLeadCapture} />
       </div>
 
       <SuccessModal

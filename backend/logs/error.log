@@ -1,0 +1,7 @@
+2025-08-26 09:26:39 [error]: Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1811:16)
+    at listenInCluster (node:net:1859:12)
+    at Server.listen (node:net:1947:7)
+    at Function.listen (/home/safiradigital/dev/frontend/brc/backend/node_modules/express/lib/application.js:635:24)
+    at startServer (file:///home/safiradigital/dev/frontend/brc/backend/src/server.js:237:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

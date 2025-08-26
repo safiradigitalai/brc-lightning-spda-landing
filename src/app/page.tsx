@@ -6,6 +6,7 @@ import { Benefits } from '@/components/sections/benefits';
 import { LeadCapture } from '@/components/forms/lead-capture';
 import { Credibility } from '@/components/sections/credibility';
 import { SuccessModal } from '@/components/sections/success-modal';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function Home() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -33,6 +34,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <ThemeToggle />
       <Hero onCtaClick={handleCtaClick} />
       <Benefits />
       <Credibility />

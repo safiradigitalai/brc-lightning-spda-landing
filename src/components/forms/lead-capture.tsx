@@ -104,39 +104,33 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
   };
 
   return (
-    <section className="relative py-32 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+    <section className="bg-section-3 relative py-32 overflow-hidden">
       {/* Cinematic Background */}
       <div className="absolute inset-0">
         {/* Electric Grid */}
         <div 
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-8 effect-grid"
           style={{
-            backgroundImage: `
-              linear-gradient(rgba(0, 229, 255, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 229, 255, 0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '80px 80px',
             transform: `translate(${mousePosition.x * 0.003}px, ${mousePosition.y * 0.003}px)`,
-            filter: 'drop-shadow(0 0 8px rgba(0, 229, 255, 0.3))'
+            filter: 'drop-shadow(0 0 8px var(--primary))'
           }}
         />
         
-        {/* Energy Orbs */}
+        {/* Energy Orbs Glassmorphism */}
         <div 
-          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full orb-cyan-light animate-float"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(0, 229, 255, 0.05) 50%, transparent 100%)',
             transform: `translate(${mousePosition.x * -0.015}px, ${mousePosition.y * -0.015}px)`,
-            animation: 'pulse 5s ease-in-out infinite'
+            animation: 'float 5s ease-in-out infinite'
           }}
         />
         
         <div 
-          className="absolute bottom-1/4 left-1/4 w-64 h-64 rounded-full blur-2xl"
+          className="absolute bottom-1/4 left-1/4 w-64 h-64 rounded-full orb-coral-light animate-float"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 229, 255, 0.25) 0%, rgba(0, 229, 255, 0.03) 70%, transparent 100%)',
             transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-            animation: 'pulse 7s ease-in-out infinite reverse'
+            animation: 'float 7s ease-in-out infinite reverse',
+            animationDelay: '2s'
           }}
         />
 
@@ -151,16 +145,18 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
           <div className="absolute bottom-32 left-1/5 w-24 h-px bg-gradient-to-r from-primary via-primary to-transparent animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]" />
         </div>
 
-        {/* Floating Energy Particles */}
+        {/* Floating Energy Particles Premium */}
         <div className={`absolute inset-0 transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-          {[...Array(6)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-0.5 h-0.5 bg-primary rounded-full animate-bounce shadow-[0_0_4px_rgba(0,229,255,1)]"
+              className={`absolute w-1 h-1 rounded-full animate-float ${
+                i % 3 === 0 ? 'particle-coral' : 'particle-cyan'
+              }`}
               style={{
-                left: `${15 + (i * 15)}%`,
-                top: `${25 + (i % 4) * 15}%`,
-                animationDelay: `${i * 0.7}s`,
+                left: `${15 + (i * 8)}%`,
+                top: `${25 + (i % 5) * 12}%`,
+                animationDelay: `${i * 0.6}s`,
                 animationDuration: `${4 + (i % 3)}s`
               }}
             />
@@ -175,48 +171,46 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
           
           {/* Badge Exclusivo */}
           <div className="inline-block">
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-8 py-2 sm:py-4 bg-slate-800/80 border-2 border-primary/60 rounded-2xl backdrop-blur-lg shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:shadow-[0_0_45px_rgba(0,229,255,0.6)] transition-all duration-300 max-w-[calc(100vw-32px)]">
-              <Download className="w-4 h-4 sm:w-6 sm:h-6 text-white animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-[0_0_4px_rgba(0,0,0,1)] text-center">ACESSO EXCLUSIVO • DOWNLOAD IMEDIATO</span>
-              <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] flex-shrink-0" />
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-8 py-2 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[calc(100vw-32px)]">
+              <Download className="w-4 h-4 sm:w-6 sm:h-6 text-gradient-cyan animate-pulse flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">ACESSO EXCLUSIVO • DOWNLOAD IMEDIATO</span>
+              <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-gradient-cyan flex-shrink-0" />
             </div>
           </div>
 
           {/* Título Cinematográfico */}
           <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[0.8] tracking-tight px-4">
-            <span className="block text-white/60 text-xl xs:text-2xl sm:text-3xl md:text-5xl font-light drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">RECEBA SEU</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,229,255,0.8)]">E-BOOK</span>
-            <span className="block text-white/80 text-2xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-7xl drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">GRATUITO</span>
+            <span className="block text-secondary text-xl xs:text-2xl sm:text-3xl md:text-5xl font-light">RECEBA SEU</span>
+            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">E-BOOK</span>
+            <span className="block text-primary text-2xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-7xl">GRATUITO</span>
           </h2>
           
           {/* Subtitle Editorial */}
           <div className="max-w-4xl mx-auto pt-4 sm:pt-6 px-4">
-            <p className="text-base sm:text-xl md:text-2xl text-slate-300 leading-relaxed font-light text-center">
-              Preencha os dados abaixo para <span className="text-primary font-bold glow-text">download instantâneo</span>
+            <p className="text-base sm:text-xl md:text-2xl text-muted leading-relaxed font-light text-center">
+              Preencha os dados abaixo para <span className="text-accent font-bold">download instantâneo</span>
             </p>
           </div>
         </div>
 
-        {/* Layout Editorial Premium */}
-        <div className="grid lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16 items-start px-4 sm:px-0">
-          
-          {/* Formulário Premium - 2 colunas (maior prioridade) */}
-          <div className={`lg:col-span-2 transition-all duration-1000 delay-300 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <Card className="relative bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-slate-800/60 backdrop-blur-xl border border-primary/30 rounded-3xl shadow-[0_0_40px_rgba(0,229,255,0.3)] hover:shadow-[0_0_60px_rgba(0,229,255,0.5)] transition-all duration-500 overflow-hidden">
+        {/* Formulário Premium - Full Width */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-0">
+          <div className={`transition-all duration-1000 delay-300 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <Card className="card-glass-strong rounded-3xl shadow-glow hover:shadow-cyan-lg glass-hover transition-all duration-500 overflow-hidden">
               
               {/* Energy Corners */}
-              <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-primary to-cyan-300 rounded-full shadow-[0_0_12px_rgba(0,229,255,0.8)] animate-pulse" />
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-gradient-to-tl from-primary to-cyan-300 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.6)] animate-pulse" style={{animationDelay: '1s'}} />
+              <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-primary to-cyan-300 rounded-full shadow-cyan animate-pulse" />
+              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-gradient-to-tl from-primary to-cyan-300 rounded-full shadow-cyan animate-pulse" style={{animationDelay: '1s'}} />
               
               {/* Header Premium */}
               <CardHeader className="relative p-4 sm:p-8 pb-4 sm:pb-6">
                 <CardTitle className="relative text-center space-y-3 sm:space-y-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/30 to-primary/15 rounded-2xl flex items-center justify-center mx-auto border border-primary/50 shadow-[0_0_20px_rgba(0,229,255,0.4)]">
-                    <Download className="w-6 h-6 sm:w-8 sm:h-8 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 surface-glass rounded-2xl flex items-center justify-center mx-auto border border-glass shadow-cyan">
+                    <Download className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(0,229,255,0.8)]">ACESSO EXCLUSIVO</h3>
-                    <p className="text-xs sm:text-sm text-slate-400 font-light">Download imediato após o cadastro</p>
+                    <h3 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">ACESSO EXCLUSIVO</h3>
+                    <p className="text-xs sm:text-sm text-muted font-light">Download imediato após o cadastro</p>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -228,17 +222,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                   
                   {/* Campo Nome Premium */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-white tracking-wide">
+                    <label className="text-sm font-semibold text-primary tracking-wide">
                       NOME COMPLETO <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                        <User className="w-5 h-5 text-slate-400" />
+                        <User className="w-5 h-5 text-muted" />
                       </div>
                       <Input
                         type="text"
                         placeholder="João Silva"
-                        className={`pl-14 h-12 text-base bg-slate-900/80 border ${errors.name ? 'border-red-400' : 'border-slate-700 focus:border-primary hover:border-slate-600'} rounded-lg font-medium text-white placeholder:text-slate-500 focus:bg-slate-900 transition-all duration-200`}
+                        className={`pl-14 h-12 text-base surface-glass border ${errors.name ? 'border-red-400' : 'border-glass focus:border-primary hover:border-primary/60'} rounded-lg font-medium text-primary placeholder:text-muted focus:surface-glass-strong transition-all duration-200`}
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
                         disabled={isLoading}
@@ -254,17 +248,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
 
                   {/* Campo Email Premium */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-white tracking-wide">
+                    <label className="text-sm font-semibold text-primary tracking-wide">
                       E-MAIL PROFISSIONAL <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                        <Mail className="w-5 h-5 text-slate-400" />
+                        <Mail className="w-5 h-5 text-muted" />
                       </div>
                       <Input
                         type="email"
                         placeholder="joao.silva@empresa.com"
-                        className={`pl-14 h-12 text-base bg-slate-900/80 border ${errors.email ? 'border-red-400' : 'border-slate-700 focus:border-primary hover:border-slate-600'} rounded-lg font-medium text-white placeholder:text-slate-500 focus:bg-slate-900 transition-all duration-200`}
+                        className={`pl-14 h-12 text-base surface-glass border ${errors.email ? 'border-red-400' : 'border-glass focus:border-primary hover:border-primary/60'} rounded-lg font-medium text-primary placeholder:text-muted focus:surface-glass-strong transition-all duration-200`}
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
                         disabled={isLoading}
@@ -280,17 +274,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
 
                   {/* Campo WhatsApp */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-white tracking-wide">
+                    <label className="text-sm font-semibold text-primary tracking-wide">
                       WHATSAPP
                     </label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                        <Phone className="w-5 h-5 text-slate-400" />
+                        <Phone className="w-5 h-5 text-muted" />
                       </div>
                       <Input
                         type="tel"
                         placeholder="(11) 99999-9999"
-                        className="pl-14 h-12 text-base bg-slate-900/80 border border-slate-700 focus:border-primary hover:border-slate-600 rounded-lg font-medium text-white placeholder:text-slate-500 focus:bg-slate-900 transition-all duration-200"
+                        className="pl-14 h-12 text-base surface-glass border border-glass focus:border-primary hover:border-primary/60 rounded-lg font-medium text-primary placeholder:text-muted focus:surface-glass-strong transition-all duration-200"
                         value={formData.whatsapp}
                         onChange={(e) => handleInputChange('whatsapp', e.target.value)}
                         disabled={isLoading}
@@ -300,17 +294,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
 
                   {/* Campo Cargo/Atuação */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-white tracking-wide">
+                    <label className="text-sm font-semibold text-primary tracking-wide">
                       CARGO/ATUAÇÃO
                     </label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                        <Briefcase className="w-5 h-5 text-slate-400" />
+                        <Briefcase className="w-5 h-5 text-muted" />
                       </div>
                       <Input
                         type="text"
                         placeholder="Engenheiro Eletricista"
-                        className="pl-14 h-12 text-base bg-slate-900/80 border border-slate-700 focus:border-primary hover:border-slate-600 rounded-lg font-medium text-white placeholder:text-slate-500 focus:bg-slate-900 transition-all duration-200"
+                        className="pl-14 h-12 text-base surface-glass border border-glass focus:border-primary hover:border-primary/60 rounded-lg font-medium text-primary placeholder:text-muted focus:surface-glass-strong transition-all duration-200"
                         value={formData.role}
                         onChange={(e) => handleInputChange('role', e.target.value)}
                         disabled={isLoading}
@@ -320,17 +314,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
 
                   {/* LGPD Consent */}
                   <div className="space-y-4">
-                    <div className="flex items-start gap-3 p-4 bg-slate-900/60 border border-slate-700 rounded-lg">
+                    <div className="flex items-start gap-3 p-4 surface-glass border border-glass rounded-lg">
                       <input
                         type="checkbox"
                         id="lgpd-consent"
                         checked={formData.lgpdConsent}
                         onChange={(e) => handleCheckboxChange('lgpdConsent', e.target.checked)}
-                        className="mt-1 w-4 h-4 text-primary bg-slate-800 border-slate-600 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                        className="mt-1 w-4 h-4 text-primary surface-glass border-glass rounded focus:ring-primary focus:ring-2 cursor-pointer"
                         disabled={isLoading}
                       />
                       <div className="flex-1">
-                        <label htmlFor="lgpd-consent" className="text-sm text-slate-300 leading-relaxed cursor-pointer">
+                        <label htmlFor="lgpd-consent" className="text-sm text-muted leading-relaxed cursor-pointer">
                           <span className="text-red-400 font-semibold">*</span> Ao preencher este formulário, você autoriza a BRC Lightning a armazenar e processar seus dados pessoais para envio do e-book e comunicações técnicas relacionadas. Seus dados não serão compartilhados com terceiros e você pode solicitar sua remoção a qualquer momento.
                         </label>
                       </div>
@@ -360,11 +354,11 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                 </form>
 
                 {/* Trust Indicators Premium */}
-                <div className="bg-gradient-to-r from-slate-800/40 to-slate-700/40 rounded-xl p-4 border border-primary/20">
+                <div className="surface-glass rounded-xl p-4 border border-glass">
                   <div className="flex flex-col space-y-3 text-sm">
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-400" />
-                      <span className="text-green-400 font-medium">Download instantâneo</span>
+                      <span className="text-green-600 font-medium">Download instantâneo</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-primary" />
@@ -372,76 +366,68 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-white" />
-                      <span className="text-white font-medium">Conteúdo técnico validado pela NBR 5419</span>
+                      <span className="text-primary font-medium">Conteúdo técnico validado pela NBR 5419</span>
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
+        </div>
 
-          {/* Preview Premium - 1 coluna */}
-          <div className={`lg:col-span-1 transition-all duration-1000 delay-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+        {/* Seção "O que você vai descobrir" - Abaixo do formulário */}
+        <div className="max-w-6xl mx-auto mt-16 px-4 sm:px-0">
+          <div className={`transition-all duration-1000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             
-            {/* E-book Preview Premium */}
-            <Card className="relative bg-gradient-to-br from-slate-800/60 via-slate-900/40 to-slate-800/60 backdrop-blur-xl border border-primary/30 rounded-2xl shadow-[0_0_30px_rgba(0,229,255,0.2)] hover:shadow-[0_0_45px_rgba(0,229,255,0.4)] transition-all duration-500 overflow-hidden">
-              
-              {/* Energy Corners */}
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-primary to-cyan-300 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.8)] animate-pulse" />
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-gradient-to-tl from-primary to-cyan-300 rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)] animate-pulse" style={{animationDelay: '1s'}} />
-              
-              <CardContent className="p-4 sm:p-8 relative">
-                
-                {/* Header Premium */}
-                <div className="relative mb-4 sm:mb-6">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/40 shadow-[0_0_15px_rgba(0,229,255,0.3)] flex-shrink-0">
-                      <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-lg sm:text-2xl font-black text-white leading-tight">O QUE VOCÊ VAI DESCOBRIR</h3>
-                      <p className="text-sm sm:text-base text-white font-light">Conteúdo exclusivo e prático</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Lista Premium */}
-                <ul className="space-y-4 sm:space-y-6 lg:space-y-7 relative">
-                  {[
-                    {
-                      title: 'Evite reprovação em laudos de SPDA',
-                      description: 'Conhecimento técnico essencial para engenheiros'
-                    },
-                    {
-                      title: 'Checklist completo baseado na NBR 5419',
-                      description: 'Garanta conformidade técnica em todos os projetos'
-                    },
-                    {
-                      title: 'Ganhe tempo automatizando cálculos',
-                      description: 'Métodos práticos para acelerar análises'
-                    },
-                    {
-                      title: 'Memorial descritivo pronto em minutos',
-                      description: 'Templates e estruturas prontas para documentação'
-                    }
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3 sm:gap-4 lg:gap-5 group hover:bg-slate-800/30 p-2 sm:p-3 lg:p-4 rounded-lg transition-all duration-200">
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-primary/40 mt-0.5 sm:mt-1">
-                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-primary" />
+            {/* Header da seção */}
+            <div className="text-center mb-12">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-primary mb-4">
+                O QUE VOCÊ VAI DESCOBRIR
+              </h3>
+              <p className="text-lg text-muted font-light">
+                Conteúdo exclusivo e prático para engenheiros especialistas
+              </p>
+            </div>
+
+            {/* Grid de benefícios - 2 colunas */}
+            <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+              {[
+                {
+                  title: 'Evite reprovação em laudos de SPDA',
+                  description: 'Conhecimento técnico essencial para engenheiros'
+                },
+                {
+                  title: 'Checklist completo baseado na NBR 5419',
+                  description: 'Garanta conformidade técnica em todos os projetos'
+                },
+                {
+                  title: 'Ganhe tempo automatizando cálculos',
+                  description: 'Métodos práticos para acelerar análises'
+                },
+                {
+                  title: 'Memorial descritivo pronto em minutos',
+                  description: 'Templates e estruturas prontas para documentação'
+                }
+              ].map((item, index) => (
+                <Card key={index} className="card-glass rounded-xl shadow-cyan hover:shadow-cyan-lg glass-hover transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 surface-glass rounded-lg flex items-center justify-center flex-shrink-0 border border-glass shadow-cyan group-hover:scale-110 transition-transform">
+                        <CheckCircle className="w-6 h-6 text-accent" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-sm sm:text-base lg:text-lg font-semibold text-white leading-tight block mb-1">
+                      <div className="flex-1">
+                        <h4 className="text-lg font-bold text-primary mb-2 leading-tight">
                           {item.title}
-                        </span>
-                        <span className="text-xs sm:text-sm lg:text-base text-white font-light">
+                        </h4>
+                        <p className="text-muted font-light leading-relaxed">
                           {item.description}
-                        </span>
+                        </p>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
 
           </div>
         </div>

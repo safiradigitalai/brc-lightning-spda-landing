@@ -1,18 +1,12 @@
 import { NextResponse } from 'next/server';
 import { Lead } from '@/lib/models/Lead';
 
+// Next.js 15 runtime configuration for Node.js APIs
+export const runtime = 'nodejs';
+
 // GET /api/leads/stats - Obter estatísticas dos leads
 export async function GET() {
   try {
-    // Durante o build, retorna uma resposta mock
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      return NextResponse.json({
-        success: true,
-        data: { totalLeads: 0, todayLeads: 0, weekLeads: 0, utmSources: {} },
-        message: 'Mock stats for build'
-      });
-    }
-
     const stats = await Lead.getStats();
     
     return NextResponse.json({

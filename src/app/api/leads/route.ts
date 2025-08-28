@@ -2,18 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Lead } from '@/lib/models/Lead';
 import { validateLead, leadQuerySchema } from '@/lib/validators/leadValidator';
 
+// Next.js 15 runtime configuration for Node.js APIs
+export const runtime = 'nodejs';
+
 // GET /api/leads - Lista leads com paginação
 export async function GET(request: NextRequest) {
   try {
-    // Durante o build, retorna uma resposta mock
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      return NextResponse.json({
-        success: true,
-        data: { leads: [], total: 0, page: 1, limit: 50, totalPages: 0 },
-        message: 'Mock data for build'
-      });
-    }
-
     const { searchParams } = new URL(request.url);
     
     // Validar query parameters
@@ -55,14 +49,6 @@ export async function GET(request: NextRequest) {
 // POST /api/leads - Criar novo lead
 export async function POST(request: NextRequest) {
   try {
-    // Durante o build, retorna uma resposta mock
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      return NextResponse.json({
-        success: false,
-        message: 'Database not configured for build'
-      }, { status: 503 });
-    }
-
     const body = await request.json();
     
     // Capturar dados da requisição

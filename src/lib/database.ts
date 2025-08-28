@@ -1,27 +1,42 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+let _supabaseClient: SupabaseClient | null = null;
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
-    throw new Error('Missing Supabase configuration. Check your .env file.');
-  }
-  // Durante o build, pode não ter as variáveis disponíveis, então criamos um cliente dummy
-  console.warn('⚠️ Supabase variables not available during build, using dummy client');
-}
+// Lazy initialization of Supabase client
+const initSupabaseClient = (): SupabaseClient => {
+  if (!_supabaseClient) {
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-// Cliente com service_role para operações do backend
-export const supabase = createClient(
-  supabaseUrl || 'https://dummy.supabase.co', 
-  supabaseServiceKey || 'dummy-key', 
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Missing Supabase configuration. Check your .env file.');
     }
+
+    _supabaseClient = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    });
   }
-);
+  
+  return _supabaseClient;
+};
+
+// Proxy to ensure lazy loading and maintain API compatibility
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(target, prop) {
+    const client = initSupabaseClient();
+    const value = (client as unknown as Record<string, unknown>)[prop as string];
+    
+    // Bind methods to maintain correct context
+    if (typeof value === 'function') {
+      return value.bind(client);
+    }
+    
+    return value;
+  }
+});
 
 // Teste de conexão
 export const testConnection = async () => {

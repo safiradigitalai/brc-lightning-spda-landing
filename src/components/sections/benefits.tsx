@@ -6,23 +6,23 @@ import { Target, Zap } from 'lucide-react';
 
 const benefits = [
   {
-    title: 'Evite reprovação em laudos de SPDA',
-    description: 'Conhecimento técnico essencial para engenheiros',
+    title: 'Quando o SPDA é obrigatório segundo normas e legislação',
+    description: 'Entenda exatamente quando aplicar proteção contra descargas',
     number: '01'
   },
   {
-    title: 'Checklist completo baseado na NBR 5419',
-    description: 'Para garantir conformidade técnica',
+    title: 'As diferenças entre os métodos de proteção',
+    description: 'Gaiola de Faraday, Franklin e Esfera Rolante explicados',
     number: '02'
   },
   {
-    title: 'Ganhe tempo automatizando cálculos',
-    description: 'Métodos práticos para acelerar análises e dimensionamentos',
+    title: 'Os principais erros que levam à reprovação de laudos',
+    description: 'E como evitá-los de forma prática e segura',
     number: '03'
   },
   {
-    title: 'Memorial descritivo pronto em minutos',
-    description: 'Templates e estruturas prontas para documentação profissional',
+    title: 'Como garantir conformidade 100% com a NBR 5419',
+    description: 'Transforme complexidade em clareza e proteja sua ART',
     number: '04'
   }
 ];
@@ -115,24 +115,16 @@ export function Benefits() {
           <div className="inline-block">
             <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[90vw]">
               <Target className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan animate-pulse flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">CONHECIMENTO TÉCNICO ESSENCIAL</span>
+              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">NESTE E-BOOK GRATUITO</span>
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan flex-shrink-0" />
             </div>
           </div>
 
           {/* Título Cinematográfico */}
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter px-4">
-            <span className="block text-secondary text-xl xs:text-2xl sm:text-2xl md:text-4xl font-light">O QUE VOCÊ VAI</span>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter px-4">
+            <span className="block text-secondary text-2xl sm:text-2xl md:text-4xl font-light">VOCÊ VAI</span>
             <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">DESCOBRIR</span>
-            <span className="block text-primary text-2xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-7xl">NO E-BOOK</span>
           </h2>
-          
-          {/* Subtitle Editorial */}
-          <div className="max-w-4xl mx-auto px-4">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted leading-relaxed font-light text-center">
-              <span className="text-accent font-bold">Conhecimento técnico essencial</span> para engenheiros que trabalham com SPDA
-            </p>
-          </div>
         </div>
 
         {/* Cards Grid Moderno */}

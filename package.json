@@ -15,8 +15,10 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.56.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "joi": "^18.0.1",
     "jspdf": "^3.0.2",
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.541.0",

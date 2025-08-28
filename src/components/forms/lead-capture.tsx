@@ -182,7 +182,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
           if (response.data?.field === 'whatsapp') {
             setErrors(prev => ({ 
               ...prev, 
-              whatsapp: `Este WhatsApp já está cadastrado com o email: ${response.data.existingEmail}`
+              whatsapp: `Este WhatsApp já está cadastrado com o email: ${response.data?.existingEmail || 'email não informado'}`
             }));
           } else {
             // Email duplicado - permitir prosseguir
@@ -309,16 +309,17 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
           </div>
 
           {/* Título Cinematográfico */}
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[0.8] tracking-tight px-4">
-            <span className="block text-secondary text-xl xs:text-2xl sm:text-3xl md:text-5xl font-light">RECEBA SEU</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">E-BOOK</span>
-            <span className="block text-primary text-2xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-7xl">GRATUITO</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight px-4">
+            <span className="block text-secondary text-xl sm:text-2xl md:text-3xl font-light">BAIXE AGORA GRATUITAMENTE</span>
+            <span className="block text-secondary text-xl sm:text-2xl md:text-3xl font-light">O VOLUME 1 DA SÉRIE</span>
+            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">&quot;GUIA DE SOBREVIVÊNCIA</span>
+            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">DO ENGENHEIRO SPDA&quot;</span>
           </h2>
           
           {/* Subtitle Editorial */}
           <div className="max-w-4xl mx-auto pt-4 sm:pt-6 px-4">
             <p className="text-base sm:text-xl md:text-2xl text-muted leading-relaxed font-light text-center">
-              Preencha os dados abaixo para <span className="text-accent font-bold">download instantâneo</span>
+              E receba também os <span className="text-accent font-bold">próximos volumes</span> direto no seu e-mail.
             </p>
           </div>
         </div>
@@ -489,7 +490,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                     ) : (
                       <Download className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-white group-hover:animate-bounce drop-shadow-[0_0_4px_rgba(0,0,0,0.8)] flex-shrink-0" />
                     )}
-                    <span className="whitespace-nowrap">{isLoading ? 'PROCESSANDO...' : 'BAIXAR E-BOOK GRATUITO'}</span>
+                    <span className="text-center leading-tight">{isLoading ? 'PROCESSANDO...' : 'BAIXAR GRÁTIS E APRENDER A EVITAR ERROS FATAIS'}</span>
                   </Button>
                 </form>
 

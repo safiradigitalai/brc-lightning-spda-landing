@@ -3,8 +3,10 @@
 import { useState, useRef } from 'react';
 import { Hero } from '@/components/sections/hero';
 import { Benefits } from '@/components/sections/benefits';
+import { PainSolution } from '@/components/sections/pain-solution';
 import { LeadCapture } from '@/components/forms/lead-capture';
 import { Credibility } from '@/components/sections/credibility';
+import { Footer } from '@/components/layout/footer';
 import { SuccessModal } from '@/components/sections/success-modal';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
@@ -40,11 +42,14 @@ export default function Home() {
       <ThemeToggle />
       <Hero onCtaClick={handleCtaClick} />
       <Benefits />
+      <PainSolution />
       <Credibility />
       
       <div ref={leadCaptureRef}>
         <LeadCapture key={formKey} onSuccess={handleLeadCapture} />
       </div>
+      
+      <Footer />
 
       <SuccessModal
         isOpen={showSuccessModal}

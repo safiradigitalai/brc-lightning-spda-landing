@@ -68,7 +68,7 @@ export default function AdminDashboard() {
   const handleSaveLead = async (leadId: string, updates: Partial<Lead>) => {
     try {
       // API call to update lead
-      const response = await fetch(`http://localhost:3001/api/leads/${leadId}`, {
+      const response = await fetch(`/api/leads/${leadId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function AdminDashboard() {
   const handleDeleteLeadConfirm = async (leadId: string) => {
     try {
       // API call to delete lead
-      const response = await fetch(`http://localhost:3001/api/leads/${leadId}`, {
+      const response = await fetch(`/api/leads/${leadId}`, {
         method: 'DELETE',
       });
 

@@ -233,8 +233,9 @@ export function DeleteLeadModal({ isOpen, lead, onClose, onDelete }: DeleteLeadM
 
           {/* Final Warning */}
           <div className="text-center">
-            <p className="text-xs text-red-400/80">
-              ⚠️ Esta ação é irreversível
+            <p className="text-xs text-red-400/80 flex items-center justify-center gap-2">
+              <AlertTriangle className="w-3 h-3" />
+              Esta ação é irreversível
             </p>
           </div>
         </CardContent>

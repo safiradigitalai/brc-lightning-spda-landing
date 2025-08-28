@@ -108,30 +108,32 @@ export function Hero({ onCtaClick }: HeroProps) {
               {/* Glass Badge Premium */}
               <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[90vw]">
                 <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan animate-pulse flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide truncate">EBOOK BRC VOLUME 1 • NBR 5419</span>
+                <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide truncate">GUIA DE SOBREVIVÊNCIA • VOLUME 1</span>
                 <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan flex-shrink-0" />
               </div>
 
               {/* Cinematic Title */}
               <div className="space-y-6">
-                <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[0.8] tracking-tight">
-                  <span className="block text-primary font-black">5 ERROS</span>
-                  <span className="block text-secondary text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light">
-                    QUE REPROVAM
-                  </span>
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight">
                   <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent font-black">
-                    LAUDOS SPDA
+                    GUIA DE SOBREVIVÊNCIA
                   </span>
-                  <span className="block text-primary text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light">
-                    (E COMO EVITÁ-LOS)
+                  <span className="block text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
+                    DO ENGENHEIRO
+                  </span>
+                  <span className="block text-primary font-black">
+                    SPDA
+                  </span>
+                  <span className="block text-secondary text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mt-2">
+                    Volume 1: Fundamentos da Proteção contra Descargas Atmosféricas
                   </span>
                 </h1>
                 
                 {/* Subtitle */}
-                <div className="max-w-2xl mx-auto pt-8 px-4">
+                <div className="max-w-3xl mx-auto pt-8 px-4">
                   <p className="text-base sm:text-lg md:text-xl text-muted leading-relaxed font-light text-center">
-                    <span className="text-accent font-semibold">Checklist técnico baseado na NBR 5419</span> para proteger sua ART, 
-                    evitar reprovações e <span className="text-accent font-semibold">ganhar tempo</span> em seus projetos de SPDA
+                    Aprenda a <span className="text-accent font-semibold">evitar erros fatais na NBR 5419</span> e proteja sua 
+                    <span className="text-accent font-semibold"> ART e reputação profissional</span> com segurança técnica.
                   </p>
                 </div>
               </div>
@@ -144,7 +146,7 @@ export function Hero({ onCtaClick }: HeroProps) {
                   onClick={onCtaClick}
                 >
                   <Download className="w-4 h-4 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-white group-hover:animate-bounce drop-shadow-[0_0_4px_rgba(0,0,0,0.8)] flex-shrink-0" />
-                  <span className="whitespace-nowrap">BAIXAR E-BOOK GRATUITO</span>
+                  <span className="text-center leading-tight">QUERO MEU E-BOOK E PROTEGER MINHA ART</span>
                 </Button>
               </div>
 

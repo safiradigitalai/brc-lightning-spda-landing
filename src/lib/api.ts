@@ -1,5 +1,5 @@
 // API Configuration and utilities
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 // Types
 export interface LeadData {
@@ -15,7 +15,7 @@ export interface LeadData {
   utm_term?: string;
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
   data?: T;
@@ -32,6 +32,8 @@ export interface LeadResponse {
   email: string;
   name: string;
   isExisting: boolean;
+  field?: string;
+  existingEmail?: string;
 }
 
 // Utility function to get UTM parameters from URL
@@ -56,7 +58,7 @@ const apiRequest = async <T>(
 ): Promise<ApiResponse<T>> => {
   const url = `${API_BASE_URL}${endpoint}`;
   const maxRetries = 3;
-  let lastError: Error;
+  let lastError: Error = new Error('Network request failed');
 
   const defaultHeaders = {
     'Content-Type': 'application/json',

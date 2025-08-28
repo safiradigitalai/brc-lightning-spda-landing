@@ -88,7 +88,7 @@ export function LeadsTable({ onEdit, onDelete }: LeadsTableProps) {
     try {
       // Note: This would need to be implemented in the API
       // For now, we'll simulate the API call
-      const response = await fetch(`http://localhost:3001/api/leads?page=${currentPage}&limit=${limit}&orderBy=${sortBy}&order=${sortOrder}`);
+      const response = await fetch(`/api/leads?page=${currentPage}&limit=${limit}&orderBy=${sortBy}&order=${sortOrder}`);
       const data = await response.json();
       
       if (data.success) {
@@ -105,8 +105,8 @@ export function LeadsTable({ onEdit, onDelete }: LeadsTableProps) {
         }
         
         setLeads(filteredLeads);
-        setTotal(data.data.pagination.total);
-        setTotalPages(data.data.pagination.totalPages);
+        setTotal(data.data.total);
+        setTotalPages(data.data.totalPages);
       }
     } catch (error) {
       console.error('Error loading leads:', error);

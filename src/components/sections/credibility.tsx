@@ -61,7 +61,7 @@ export function Credibility() {
           {/* Badge Exclusivo */}
           <div className="inline-block">
             <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[90vw]">
-              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">BRC LIGHTNING • ENGENHARIA SPDA</span>
+              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">AUTORIDADE • ENGENHEIRO BIAGIONE</span>
             </div>
           </div>
         </div>
@@ -82,18 +82,18 @@ export function Credibility() {
                 
                 {/* Quote Icon */}
                 <div className="w-16 h-16 surface-glass rounded-2xl flex items-center justify-center mx-auto mb-8 border border-glass shadow-cyan">
-                  <div className="text-4xl font-black text-primary">"</div>
+                  <div className="text-4xl font-black text-primary">&quot;</div>
                 </div>
                 
                 {/* Quote */}
                 <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-primary leading-relaxed text-center mb-6 sm:mb-8">
-                  De <span className="text-accent font-semibold">engenheiro para engenheiro</span>: criamos a BRC Lightning para devolver 
-                  <span className="text-accent font-semibold"> segurança e produtividade</span> aos profissionais de SPDA.
+                  Conteúdo elaborado pelo <span className="text-accent font-semibold">engenheiro Biagione</span>, fundador da BRClightning e 
+                  <span className="text-accent font-semibold"> referência nacional</span> em projetos de SPDA.
                 </blockquote>
                 
                 {/* Description */}
                 <p className="text-base sm:text-lg text-muted leading-relaxed text-center">
-                  Nossa plataforma já ajudou <span className="text-primary font-semibold">centenas de engenheiros</span> a otimizar seus projetos de proteção contra descargas atmosféricas.
+                  Experiência comprovada em <span className="text-primary font-semibold">proteção contra descargas atmosféricas</span> e conformidade com a NBR 5419.
                 </p>
               </CardContent>
             </Card>

@@ -21,6 +21,7 @@ import * as XLSX from 'xlsx';
 import { leadApi } from '@/lib/api';
 
 // Dynamic import for PDF functionality
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let jsPDFModule: any = null;
 
 interface Lead {
@@ -65,19 +66,32 @@ export function ExportData() {
 
   const loadLeadsData = async () => {
     try {
-      // Load basic stats
-      const statsResponse = await leadApi.getStats();
-      if (statsResponse.success && statsResponse.data) {
-        setTotalLeads(statsResponse.data.totalLeads);
+      // Load basic stats  
+      const statsResponse = await fetch('/api/leads/stats/dashboard');
+      const statsData = await statsResponse.json();
+      if (statsData.success && statsData.data) {
+        setTotalLeads(statsData.data.totalLeads);
       }
 
-      // Load all leads for export (we would normally paginate this)
-      const response = await fetch('http://localhost:3001/api/leads?limit=1000');
-      const data = await response.json();
+      // Load all leads for export - fetch all pages
+      let allLeads: Lead[] = [];
+      let page = 1;
+      let hasMore = true;
       
-      if (data.success) {
-        setLeads(data.data.leads);
+      while (hasMore) {
+        const response = await fetch(`/api/leads?page=${page}&limit=100`);
+        const data = await response.json();
+        
+        if (data.success && data.data.leads.length > 0) {
+          allLeads = [...allLeads, ...data.data.leads];
+          hasMore = page < data.data.totalPages;
+          page++;
+        } else {
+          hasMore = false;
+        }
       }
+      
+      setLeads(allLeads);
     } catch (error) {
       console.error('Error loading leads data:', error);
     }
@@ -87,8 +101,26 @@ export function ExportData() {
     setExportStatus({ type: 'CSV', status: 'loading', message: 'Preparando arquivo CSV...' });
     
     try {
+      // Recarregar dados
+      let exportLeads: Lead[] = [];
+      let page = 1;
+      let hasMore = true;
+      
+      while (hasMore) {
+        const response = await fetch(`/api/leads?page=${page}&limit=100`);
+        const data = await response.json();
+        
+        if (data.success && data.data.leads.length > 0) {
+          exportLeads = [...exportLeads, ...data.data.leads];
+          hasMore = page < data.data.totalPages;
+          page++;
+        } else {
+          hasMore = false;
+        }
+      }
+
       // Prepare data
-      const csvData = leads.map(lead => ({
+      const csvData = exportLeads.map(lead => ({
         'Nome': lead.name,
         'Email': lead.email,
         'WhatsApp': lead.whatsapp || '',
@@ -115,7 +147,7 @@ export function ExportData() {
       setExportStatus({ 
         type: 'CSV', 
         status: 'success', 
-        message: `${leads.length} leads exportados com sucesso!` 
+        message: `${exportLeads.length} leads exportados com sucesso!` 
       });
 
     } catch (error) {
@@ -137,8 +169,26 @@ export function ExportData() {
     setExportStatus({ type: 'Excel', status: 'loading', message: 'Preparando planilha Excel...' });
     
     try {
+      // Recarregar dados
+      let exportLeads: Lead[] = [];
+      let page = 1;
+      let hasMore = true;
+      
+      while (hasMore) {
+        const response = await fetch(`/api/leads?page=${page}&limit=100`);
+        const data = await response.json();
+        
+        if (data.success && data.data.leads.length > 0) {
+          exportLeads = [...exportLeads, ...data.data.leads];
+          hasMore = page < data.data.totalPages;
+          page++;
+        } else {
+          hasMore = false;
+        }
+      }
+
       // Prepare data with more detailed formatting
-      const excelData = leads.map(lead => ({
+      const excelData = exportLeads.map(lead => ({
         'Nome Completo': lead.name,
         'E-mail': lead.email,
         'WhatsApp': lead.whatsapp || 'Não informado',
@@ -172,10 +222,10 @@ export function ExportData() {
 
       // Add summary sheet
       const summaryData = [
-        { 'Métrica': 'Total de Leads', 'Valor': leads.length },
+        { 'Métrica': 'Total de Leads', 'Valor': exportLeads.length },
         { 'Métrica': 'Data da Exportação', 'Valor': new Date().toLocaleString('pt-BR') },
-        { 'Métrica': 'Leads com WhatsApp', 'Valor': leads.filter(l => l.whatsapp).length },
-        { 'Métrica': 'Leads com Cargo', 'Valor': leads.filter(l => l.role).length }
+        { 'Métrica': 'Leads com WhatsApp', 'Valor': exportLeads.filter(l => l.whatsapp).length },
+        { 'Métrica': 'Leads com Cargo', 'Valor': exportLeads.filter(l => l.role).length }
       ];
       const summaryWs = XLSX.utils.json_to_sheet(summaryData);
       XLSX.utils.book_append_sheet(wb, summaryWs, 'Resumo');
@@ -190,7 +240,7 @@ export function ExportData() {
       setExportStatus({ 
         type: 'Excel', 
         status: 'success', 
-        message: `Planilha com ${leads.length} leads exportada!` 
+        message: `Planilha com ${exportLeads.length} leads exportada!` 
       });
 
     } catch (error) {
@@ -211,6 +261,36 @@ export function ExportData() {
     setExportStatus({ type: 'PDF', status: 'loading', message: 'Gerando relatório PDF...' });
     
     try {
+      // Recarregar dados para garantir que temos os leads mais atualizados
+      let exportLeads: Lead[] = [];
+      let page = 1;
+      let hasMore = true;
+      
+      while (hasMore) {
+        const response = await fetch(`/api/leads?page=${page}&limit=100`);
+        const data = await response.json();
+        
+        if (data.success && data.data.leads.length > 0) {
+          exportLeads = [...exportLeads, ...data.data.leads];
+          hasMore = page < data.data.totalPages;
+          page++;
+        } else {
+          hasMore = false;
+        }
+      }
+      
+      
+      if (exportLeads.length === 0) {
+        setExportStatus({ 
+          type: 'PDF', 
+          status: 'error', 
+          message: 'Nenhum lead encontrado para exportar' 
+        });
+        setTimeout(() => {
+          setExportStatus({ type: '', status: 'idle', message: '' });
+        }, 3000);
+        return;
+      }
       // Load PDF module if not loaded
       if (!jsPDFModule) {
         jsPDFModule = (await import('jspdf')).default;
@@ -226,78 +306,74 @@ export function ExportData() {
       pdf.setFontSize(12);
       pdf.setTextColor(100, 100, 100);
       pdf.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 20, 40);
-      pdf.text(`Total de leads: ${leads.length}`, 20, 50);
+      pdf.text(`Total de leads: ${exportLeads.length}`, 20, 50);
 
       // Summary statistics
-      const leadsWithWhatsApp = leads.filter(l => l.whatsapp).length;
-      const leadsWithRole = leads.filter(l => l.role).length;
-      const utmSources = [...new Set(leads.filter(l => l.utm_source).map(l => l.utm_source))];
+      const leadsWithWhatsApp = exportLeads.filter(l => l.whatsapp).length;
+      const leadsWithRole = exportLeads.filter(l => l.role).length;
+      const utmSources = [...new Set(exportLeads.filter(l => l.utm_source).map(l => l.utm_source))];
 
       pdf.setFontSize(14);
       pdf.setTextColor(0, 0, 0);
       pdf.text('Resumo Estatístico:', 20, 70);
       
       pdf.setFontSize(10);
-      pdf.text(`• Leads com WhatsApp: ${leadsWithWhatsApp} (${((leadsWithWhatsApp/leads.length)*100).toFixed(1)}%)`, 25, 80);
-      pdf.text(`• Leads com cargo informado: ${leadsWithRole} (${((leadsWithRole/leads.length)*100).toFixed(1)}%)`, 25, 90);
+      pdf.text(`• Leads com WhatsApp: ${leadsWithWhatsApp} (${((leadsWithWhatsApp/exportLeads.length)*100).toFixed(1)}%)`, 25, 80);
+      pdf.text(`• Leads com cargo informado: ${leadsWithRole} (${((leadsWithRole/exportLeads.length)*100).toFixed(1)}%)`, 25, 90);
       pdf.text(`• Fontes UTM únicas: ${utmSources.length}`, 25, 100);
 
-      // Create table manually using native jsPDF
+      // Create a more compact table layout
       const pageWidth = pdf.internal.pageSize.width;
       const pageHeight = pdf.internal.pageSize.height;
       let yPosition = 110;
       
-      // Table header
-      pdf.setFillColor(0, 229, 255);
-      pdf.rect(20, yPosition, pageWidth - 40, 10, 'F');
+      pdf.setFontSize(12);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text('Lista Detalhada de Leads:', 20, yPosition);
+      yPosition += 15;
       
       pdf.setFontSize(8);
-      pdf.setTextColor(255, 255, 255);
-      const headers = ['NOME', 'EMAIL', 'WHATSAPP', 'CARGO', 'FONTE', 'DATA'];
-      const colWidths = [35, 50, 25, 30, 25, 25];
-      let xPos = 25;
-      
-      headers.forEach((header, i) => {
-        pdf.text(header, xPos, yPosition + 7);
-        xPos += colWidths[i];
-      });
-
-      // Table rows
-      yPosition += 10;
       pdf.setTextColor(50, 50, 50);
-      pdf.setFontSize(7);
       
-      leads.forEach((lead, index) => {
-        if (yPosition > pageHeight - 40) {
+      exportLeads.forEach((lead, index) => {
+        if (yPosition > pageHeight - 50) {
           pdf.addPage();
           yPosition = 30;
         }
         
-        // Alternate row colors
+        // Lead card background
         if (index % 2 === 0) {
           pdf.setFillColor(248, 250, 252);
-          pdf.rect(20, yPosition, pageWidth - 40, 8, 'F');
+          pdf.rect(20, yPosition - 2, pageWidth - 40, 22, 'F');
         }
         
-        xPos = 25;
-        const rowData = [
-          lead.name.length > 15 ? lead.name.substring(0, 15) + '...' : lead.name,
-          lead.email.length > 20 ? lead.email.substring(0, 20) + '...' : lead.email,
-          lead.whatsapp || '-',
-          (lead.role && lead.role.length > 12) ? lead.role.substring(0, 12) + '...' : (lead.role || '-'),
-          lead.utm_source || '-',
-          new Date(lead.created_at).toLocaleDateString('pt-BR')
-        ];
+        // Lead info in card format
+        pdf.setFontSize(9);
+        pdf.setTextColor(0, 0, 0);
+        pdf.text(`${index + 1}. ${lead.name}`, 25, yPosition + 4);
         
-        rowData.forEach((data, i) => {
-          pdf.text(String(data), xPos, yPosition + 5);
-          xPos += colWidths[i];
-        });
+        pdf.setFontSize(8);
+        pdf.setTextColor(80, 80, 80);
+        pdf.text(`Email: ${lead.email}`, 25, yPosition + 10);
         
-        yPosition += 8;
+        if (lead.whatsapp) {
+          pdf.text(`WhatsApp: ${lead.whatsapp}`, 25, yPosition + 14);
+        }
+        
+        if (lead.role) {
+          pdf.text(`Cargo: ${lead.role}`, 25, yPosition + 18);
+        }
+        
+        // Date on the right
+        pdf.setTextColor(100, 100, 100);
+        const dateStr = new Date(lead.created_at).toLocaleDateString('pt-BR');
+        pdf.text(dateStr, pageWidth - 45, yPosition + 4);
+        
+        yPosition += 25;
       });
 
       // Footer
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const pageCount = (pdf as any).internal.getNumberOfPages();
       pdf.setFontSize(8);
       pdf.setTextColor(150, 150, 150);
@@ -312,7 +388,7 @@ export function ExportData() {
       setExportStatus({ 
         type: 'PDF', 
         status: 'success', 
-        message: `Relatório PDF com ${leads.length} leads gerado!` 
+        message: `Relatório PDF com ${exportLeads.length} leads gerado!` 
       });
 
     } catch (error) {

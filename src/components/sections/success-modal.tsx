@@ -7,7 +7,8 @@ import {
   Download, 
   Mail, 
   X, 
-  ExternalLink 
+  ExternalLink,
+  Trophy
 } from 'lucide-react';
 
 interface SuccessModalProps {
@@ -21,10 +22,10 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
   if (!isOpen) return null;
 
   const handleDownload = () => {
-    // Simular download do e-book
+    // Download do e-book real
     const link = document.createElement('a');
-    link.href = '/ebook-sample.pdf'; // Substituir pelo link real
-    link.download = 'Guia-Completo-Crescimento-Empresarial.pdf';
+    link.href = '/Ebook BRC.pdf';
+    link.download = 'Guia-de-Sobrevivencia-do-Engenheiro-SPDA-Volume-1.pdf';
     link.click();
   };
 
@@ -47,11 +48,12 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
           <div className="mx-auto w-20 h-20 bg-gradient-to-br from-primary/30 to-primary/15 rounded-2xl flex items-center justify-center mb-6 border border-primary/50 shadow-[0_0_25px_rgba(0,229,255,0.4)]">
             <CheckCircle className="w-12 h-12 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
           </div>
-          <CardTitle className="text-4xl font-black bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,229,255,0.8)] mb-3">
-            Parabéns, {name.split(' ')[0]}! 🎉
+          <CardTitle className="flex items-center justify-center gap-3 text-4xl font-black bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,229,255,0.8)] mb-3">
+            Parabéns, {name.split(' ')[0]}!
+            <Trophy className="w-10 h-10 text-accent" />
           </CardTitle>
           <p className="text-xl text-slate-300 font-light">
-            Seu e-book está pronto para download
+            Seu Guia de Sobrevivência está pronto!
           </p>
         </CardHeader>
 
@@ -60,7 +62,7 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
           {/* Download Direto */}
           <div className="text-center space-y-6">
             <h3 className="text-2xl font-bold text-white">
-              Baixe seu e-book agora:
+              Baixe seu Guia de Sobrevivência agora:
             </h3>
             
             <Button 
@@ -69,7 +71,7 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
               onClick={handleDownload}
             >
               <Download className="w-6 h-6 mr-3 text-white group-hover:animate-bounce drop-shadow-[0_0_4px_rgba(0,0,0,0.8)]" />
-              BAIXAR E-BOOK BRC VOLUME 1
+              BAIXAR GUIA DE SOBREVIVÊNCIA - VOLUME 1
             </Button>
           </div>
 
@@ -86,19 +88,19 @@ export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps
                 <div className="w-8 h-8 bg-gradient-to-br from-primary to-cyan-300 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,229,255,0.5)]">
                   1
                 </div>
-                <span className="text-slate-300 leading-relaxed">Leia os 5 erros críticos identificados no e-book</span>
+                <span className="text-slate-300 leading-relaxed">Leia os fundamentos da NBR 5419 no guia</span>
               </li>
               <li className="flex items-start gap-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-primary to-cyan-300 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,229,255,0.5)]">
                   2
                 </div>
-                <span className="text-slate-300 leading-relaxed">Aplique as soluções práticas em seus próximos laudos</span>
+                <span className="text-slate-300 leading-relaxed">Aplique o conhecimento em seus projetos SPDA</span>
               </li>
               <li className="flex items-start gap-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-primary to-cyan-300 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,229,255,0.5)]">
                   3
                 </div>
-                <span className="text-slate-300 leading-relaxed">Acompanhe nossos emails com dicas técnicas exclusivas</span>
+                <span className="text-slate-300 leading-relaxed">Aguarde os próximos volumes da série diretamente no seu email</span>
               </li>
             </ul>
           </div>

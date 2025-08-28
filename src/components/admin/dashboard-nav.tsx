@@ -7,7 +7,6 @@ import {
   LayoutDashboard,
   Users,
   Download,
-  Settings,
   LogOut,
   Shield,
   Zap,

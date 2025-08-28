@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { Lead } from '@/lib/models/Lead';
 
 // GET /api/leads/stats/dashboard - Obter estatísticas específicas do dashboard
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const stats = await Lead.getStats();
     

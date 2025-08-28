@@ -197,7 +197,7 @@ export const emailSchema = Joi.object({
 });
 
 // Função helper para validar dados de entrada
-export const validateLead = (data: any) => {
+export const validateLead = (data: unknown) => {
   const { error, value } = leadValidationSchema.validate(data, {
     abortEarly: false,
     stripUnknown: true
@@ -224,10 +224,12 @@ export const validateLead = (data: any) => {
   };
 };
 
-export default {
+const leadValidator = {
   leadValidationSchema,
   leadUpdateSchema,
   leadQuerySchema,
   emailSchema,
   validateLead
 };
+
+export default leadValidator;

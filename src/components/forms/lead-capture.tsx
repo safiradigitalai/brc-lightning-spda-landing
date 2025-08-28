@@ -11,14 +11,10 @@ import {
   CheckCircle, 
   Loader2, 
   AlertTriangle,
-  Users,
-  Shield,
-  Target,
-  Zap,
   Phone,
   Briefcase
 } from 'lucide-react';
-import { leadApi, type LeadData, type ApiResponse, type LeadResponse, handleApiError } from '@/lib/api';
+import { leadApi, type LeadData, handleApiError } from '@/lib/api';
 
 interface LeadCaptureProps {
   onSuccess: (email: string, name: string) => void;
@@ -34,7 +30,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{name?: string; email?: string; whatsapp?: string; role?: string; lgpdConsent?: string; api?: string}>({});
-  const [isExistingUser, setIsExistingUser] = useState(false);
+  // const [isExistingUser, setIsExistingUser] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -77,7 +73,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
   // Validação melhorada de email
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const commonDomains = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'uol.com.br', 'terra.com.br'];
+    // const commonDomains = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'uol.com.br', 'terra.com.br'];
     
     if (!emailRegex.test(email)) {
       return 'Email deve ter um formato válido';
@@ -170,7 +166,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
       
       if (response.success && response.data) {
         // Sucesso - usuário novo ou existente
-        setIsExistingUser(response.data.isExisting);
+        // setIsExistingUser(response.data.isExisting);
         onSuccess(response.data.email, response.data.name);
       } else {
         // Erro da API
@@ -186,7 +182,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
             }));
           } else {
             // Email duplicado - permitir prosseguir
-            setIsExistingUser(true);
+            // setIsExistingUser(true);
             onSuccess(formData.email, formData.name);
           }
         } else {

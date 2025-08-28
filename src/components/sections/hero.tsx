@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Download, Users, CheckCircle, Zap, Shield } from 'lucide-react';
+import { Download, CheckCircle, Zap, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface HeroProps {

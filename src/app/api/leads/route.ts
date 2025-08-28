@@ -49,9 +49,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Capturar dados da requisição
-    const ip = request.ip || 
-      request.headers.get('x-forwarded-for') || 
+    const ip = request.headers.get('x-forwarded-for') || 
       request.headers.get('x-real-ip') || 
+      request.headers.get('cf-connecting-ip') ||
       'unknown';
     
     const userAgent = request.headers.get('user-agent') || 'unknown';
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
           code: 'DUPLICATE_DATA',
           data: {
             field: 'whatsapp',
-            existingEmail: whatsappCheck.leadData.email
+            existingEmail: whatsappCheck.leadData?.email
           }
         }, { status: 409 });
       }

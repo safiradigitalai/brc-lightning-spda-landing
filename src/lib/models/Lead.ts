@@ -216,7 +216,7 @@ export class Lead {
 
       if (utmError) throw utmError;
 
-      const utmSources = (utmData || []).reduce((acc: Record<string, number>, curr: any) => {
+      const utmSources = (utmData || []).reduce((acc: Record<string, number>, curr: { utm_source: string }) => {
         acc[curr.utm_source] = (acc[curr.utm_source] || 0) + 1;
         return acc;
       }, {});
@@ -254,7 +254,7 @@ export class Lead {
   }
 
   // Verificar se WhatsApp já existe
-  static async whatsappExists(whatsapp: string): Promise<{ exists: boolean; leadData: any }> {
+  static async whatsappExists(whatsapp: string): Promise<{ exists: boolean; leadData: { id: string; email: string } | null }> {
     try {
       if (!whatsapp) return { exists: false, leadData: null };
 

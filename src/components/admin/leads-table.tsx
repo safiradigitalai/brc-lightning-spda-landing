@@ -1,30 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
   Users,
   Search,
-  Filter,
   Edit,
   Trash2,
   Mail,
   Phone,
   Calendar,
-  MapPin,
   ExternalLink,
   ChevronLeft,
   ChevronRight,
-  MoreVertical,
-  Eye,
-  Loader2,
-  AlertTriangle,
-  CheckCircle,
-  Clock
+  Loader2
 } from 'lucide-react';
-import { leadApi } from '@/lib/api';
+// import { leadApi } from '@/lib/api';
 
 interface Lead {
   id: string;
@@ -51,39 +44,14 @@ export function LeadsTable({ onEdit, onDelete }: LeadsTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
-  const [selectedLead, setSelectedLead] = useState<string | null>(null);
+  // const [selectedLead, setSelectedLead] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState('created_at');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const limit = 10;
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  useEffect(() => {
-    loadLeads();
-  }, [currentPage, sortBy, sortOrder]);
-
-  useEffect(() => {
-    // Reset page when search changes
-    if (currentPage !== 1) {
-      setCurrentPage(1);
-    } else {
-      loadLeads();
-    }
-  }, [searchTerm]);
-
-  const loadLeads = async () => {
+  const loadLeads = useCallback(async () => {
     setIsLoading(true);
     try {
       // Note: This would need to be implemented in the API
@@ -113,7 +81,32 @@ export function LeadsTable({ onEdit, onDelete }: LeadsTableProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [currentPage, limit, sortBy, sortOrder, searchTerm]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    loadLeads();
+  }, [currentPage, sortBy, sortOrder, loadLeads]);
+
+  useEffect(() => {
+    // Reset page when search changes
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      loadLeads();
+    }
+  }, [searchTerm, currentPage, loadLeads]);
 
   const handleSort = (column: string) => {
     if (sortBy === column) {
@@ -252,12 +245,10 @@ export function LeadsTable({ onEdit, onDelete }: LeadsTableProps) {
                 </tr>
               </thead>
               <tbody>
-                {leads.map((lead, index) => (
+                {leads.map((lead) => (
                   <tr 
                     key={lead.id} 
-                    className={`border-b border-glass/50 hover:surface-glass transition-colors duration-200 ${
-                      selectedLead === lead.id ? 'surface-glass-strong' : ''
-                    }`}
+                    className="border-b border-glass/50 hover:surface-glass transition-colors duration-200"
                   >
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">

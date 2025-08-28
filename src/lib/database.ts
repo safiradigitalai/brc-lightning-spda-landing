@@ -18,7 +18,7 @@ export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 // Teste de conexão
 export const testConnection = async () => {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('leads')
       .select('count', { count: 'exact', head: true });
     

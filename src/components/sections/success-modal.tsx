@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   CheckCircle, 
   Download, 
-  Mail, 
   X, 
   ExternalLink,
   Trophy
@@ -18,7 +17,7 @@ interface SuccessModalProps {
   name: string;
 }
 
-export function SuccessModal({ isOpen, onClose, email, name }: SuccessModalProps) {
+export function SuccessModal({ isOpen, onClose, name }: SuccessModalProps) {
   if (!isOpen) return null;
 
   const handleDownload = () => {

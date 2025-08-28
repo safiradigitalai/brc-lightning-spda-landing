@@ -5,10 +5,11 @@ import { leadUpdateSchema } from '@/lib/validators/leadValidator';
 // GET /api/leads/[id] - Buscar lead por ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const lead = await Lead.findById(params.id);
+    const { id } = await params;
+    const lead = await Lead.findById(id);
     
     if (!lead) {
       return NextResponse.json({
@@ -35,9 +36,10 @@ export async function GET(
 // PUT /api/leads/[id] - Atualizar lead
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     
     // Validar dados de atualização
@@ -60,7 +62,7 @@ export async function PUT(
     }
 
     // Verificar se o lead existe
-    const existingLead = await Lead.findById(params.id);
+    const existingLead = await Lead.findById(id);
     if (!existingLead) {
       return NextResponse.json({
         success: false,
@@ -89,14 +91,14 @@ export async function PUT(
           message: 'Este WhatsApp já está sendo usado por outro lead',
           code: 'DUPLICATE_WHATSAPP',
           data: {
-            existingEmail: whatsappCheck.leadData.email
+            existingEmail: whatsappCheck.leadData?.email
           }
         }, { status: 409 });
       }
     }
 
     // Atualizar lead
-    const updatedLead = await Lead.update(params.id, value);
+    const updatedLead = await Lead.update(id, value);
 
     return NextResponse.json({
       success: true,
@@ -116,11 +118,12 @@ export async function PUT(
 // DELETE /api/leads/[id] - Deletar lead
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     // Verificar se o lead existe
-    const existingLead = await Lead.findById(params.id);
+    const existingLead = await Lead.findById(id);
     if (!existingLead) {
       return NextResponse.json({
         success: false,
@@ -129,7 +132,7 @@ export async function DELETE(
     }
 
     // Deletar lead
-    await Lead.delete(params.id);
+    await Lead.delete(id);
 
     return NextResponse.json({
       success: true,

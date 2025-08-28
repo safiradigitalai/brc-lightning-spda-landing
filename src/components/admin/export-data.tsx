@@ -8,8 +8,6 @@ import {
   FileText,
   FileSpreadsheet,
   File,
-  Calendar,
-  Filter,
   Users,
   Loader2,
   CheckCircle,
@@ -18,7 +16,7 @@ import {
   Zap
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
-import { leadApi } from '@/lib/api';
+// import { leadApi } from '@/lib/api';
 
 // Dynamic import for PDF functionality
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,7 +37,7 @@ interface Lead {
 
 export function ExportData() {
   const [leads, setLeads] = useState<Lead[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [exportStatus, setExportStatus] = useState<{ type: string; status: 'idle' | 'loading' | 'success' | 'error'; message: string }>({
     type: '',
     status: 'idle',
@@ -373,8 +371,7 @@ export function ExportData() {
       });
 
       // Footer
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pageCount = (pdf as any).internal.getNumberOfPages();
+      // const pageCount = (pdf as any).internal.getNumberOfPages();
       pdf.setFontSize(8);
       pdf.setTextColor(150, 150, 150);
       pdf.text('BRC Consultoria - Relatório Confidencial', 20, pdf.internal.pageSize.height - 10);

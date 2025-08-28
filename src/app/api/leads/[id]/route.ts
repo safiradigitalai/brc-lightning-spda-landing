@@ -8,6 +8,14 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Durante o build, retorna uma resposta mock
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json({
+        success: false,
+        message: 'Database not configured for build'
+      }, { status: 503 });
+    }
+
     const { id } = await params;
     const lead = await Lead.findById(id);
     
@@ -39,6 +47,14 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Durante o build, retorna uma resposta mock
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json({
+        success: false,
+        message: 'Database not configured for build'
+      }, { status: 503 });
+    }
+
     const { id } = await params;
     const body = await request.json();
     
@@ -121,6 +137,14 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Durante o build, retorna uma resposta mock
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json({
+        success: false,
+        message: 'Database not configured for build'
+      }, { status: 503 });
+    }
+
     const { id } = await params;
     // Verificar se o lead existe
     const existingLead = await Lead.findById(id);

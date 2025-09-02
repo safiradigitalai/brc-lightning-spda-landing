@@ -23,7 +23,7 @@ export function SuccessModal({ isOpen, onClose, name }: SuccessModalProps) {
   const handleDownload = () => {
     // Download do e-book real
     const link = document.createElement('a');
-    link.href = '/Ebook BRC.pdf';
+    link.href = '/EbookBRC.pdf';
     link.download = 'Guia-de-Sobrevivencia-do-Engenheiro-SPDA-Volume-1.pdf';
     link.click();
   };

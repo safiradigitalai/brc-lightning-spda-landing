@@ -295,21 +295,21 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
         {/* Título Editorial Premium */}
         <div className={`text-center mb-16 sm:mb-20 space-y-6 sm:space-y-8 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           
-          {/* Badge Exclusivo */}
+          {/* Badge Exclusivo - BRC Sólido */}
           <div className="inline-block">
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-8 py-2 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[calc(100vw-32px)]">
-              <Download className="w-4 h-4 sm:w-6 sm:h-6 text-gradient-cyan animate-pulse flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">ACESSO EXCLUSIVO • DOWNLOAD IMEDIATO</span>
-              <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-gradient-cyan flex-shrink-0" />
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-8 py-2 sm:py-4 bg-white border-2 border-brc-secondary rounded-full shadow-cyan-lg hover:shadow-glow transition-all duration-300 max-w-[calc(100vw-32px)]">
+              <Download className="w-4 h-4 sm:w-6 sm:h-6 text-brc-secondary animate-pulse flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold text-brc-primary tracking-wide text-center">ACESSO EXCLUSIVO • DOWNLOAD IMEDIATO</span>
+              <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-brc-secondary flex-shrink-0" />
             </div>
           </div>
 
-          {/* Título Cinematográfico */}
+          {/* Título Cinematográfico - BRC */}
           <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight px-4">
-            <span className="block text-secondary text-xl sm:text-2xl md:text-3xl font-light">BAIXE AGORA GRATUITAMENTE</span>
-            <span className="block text-secondary text-xl sm:text-2xl md:text-3xl font-light">O VOLUME 1 DA SÉRIE</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">&quot;GUIA DE SOBREVIVÊNCIA</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">DO ENGENHEIRO SPDA&quot;</span>
+            <span className="block text-brc-dark text-xl sm:text-2xl md:text-3xl font-light">BAIXE AGORA GRATUITAMENTE</span>
+            <span className="block text-brc-dark text-xl sm:text-2xl md:text-3xl font-light">O VOLUME 1 DA SÉRIE</span>
+            <span className="block title-gradient-brc">&quot;GUIA DE SOBREVIVÊNCIA</span>
+            <span className="block title-gradient-brc">DO ENGENHEIRO SPDA&quot;</span>
           </h2>
           
           {/* Subtitle Editorial */}
@@ -474,11 +474,11 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                     </div>
                   )}
 
-                  {/* CTA Button Premium */}
+                  {/* CTA Button - BRC Sólido */}
                   <Button 
                     type="submit" 
                     size="lg"
-                    className="group w-full h-12 sm:h-16 text-sm sm:text-lg font-black bg-gradient-to-r from-primary via-cyan-400 to-primary text-white hover:from-cyan-400 hover:via-primary hover:to-cyan-400 shadow-[0_0_25px_rgba(0,229,255,0.5)] hover:shadow-[0_0_45px_rgba(0,229,255,0.8)] transition-all duration-500 hover:scale-105 hover:-translate-y-1 disabled:opacity-50 cursor-pointer"
+                    className="group btn-gradient-brc w-full h-12 sm:h-16 text-sm sm:text-lg font-black shadow-[0_0_25px_rgba(6,98,161,0.5)] hover:shadow-[0_0_45px_rgba(57,163,199,0.8)] transition-all duration-500 hover:scale-105 hover:-translate-y-1 disabled:opacity-50 cursor-pointer"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -503,7 +503,7 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-white" />
-                      <span className="text-primary font-medium">Conteúdo técnico validado pela NBR 5419</span>
+                      <span className="text-primary font-medium">Baseado na NBR 5419 e em referências técnicas e científicas internacionais</span>
                     </div>
                   </div>
                 </div>
@@ -530,19 +530,19 @@ export function LeadCapture({ onSuccess }: LeadCaptureProps) {
             <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
               {[
                 {
-                  title: 'Evite reprovação em laudos de SPDA',
-                  description: 'Conhecimento técnico essencial para engenheiros'
+                  title: 'Emita Memórias de Cálculo/Relatórios',
+                  description: 'Técnicos confiáveis para SPDA com suporte matemático preciso'
                 },
                 {
-                  title: 'Checklist completo baseado na NBR 5419',
-                  description: 'Garanta conformidade técnica em todos os projetos'
+                  title: 'Avalie a proteção fornecida pelo SPDA',
+                  description: 'Estruturas e equipamentos com memórias de cálculo confiáveis'
                 },
                 {
                   title: 'Ganhe tempo automatizando cálculos',
                   description: 'Métodos práticos para acelerar análises'
                 },
                 {
-                  title: 'Memorial descritivo pronto em minutos',
+                  title: 'Emita memórias de cálculo e relatórios técnicos em minutos',
                   description: 'Templates e estruturas prontas para documentação'
                 }
               ].map((item, index) => (

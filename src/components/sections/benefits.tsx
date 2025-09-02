@@ -6,7 +6,7 @@ import { Target, Zap } from 'lucide-react';
 
 const benefits = [
   {
-    title: 'Quando o SPDA é obrigatório segundo normas e legislação',
+    title: 'Quando o SPDA é obrigatório segundo normas',
     description: 'Entenda exatamente quando aplicar proteção contra descargas',
     number: '01'
   },
@@ -16,8 +16,8 @@ const benefits = [
     number: '02'
   },
   {
-    title: 'Os principais erros que levam à reprovação de laudos',
-    description: 'E como evitá-los de forma prática e segura',
+    title: 'Desmistifique a NBR 5419 e aplique a proteção SPDA com confiança',
+    description: 'Nossos e-books ajudam você a interpretar a norma de forma prática e objetiva',
     number: '03'
   },
   {
@@ -111,19 +111,19 @@ export function Benefits() {
         {/* Título Editorial Premium */}
         <div className="text-center mb-24 space-y-8">
           
-          {/* Badge Exclusivo */}
+          {/* Badge Exclusivo - BRC */}
           <div className="inline-block">
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[90vw]">
-              <Target className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan animate-pulse flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide text-center">NESTE E-BOOK GRATUITO</span>
-              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan flex-shrink-0" />
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 bg-white border-2 border-brc-accent rounded-full shadow-cyan-lg hover:shadow-glow transition-all duration-300 max-w-[90vw]">
+              <Target className="w-4 h-4 sm:w-5 sm:h-5 text-brc-accent animate-pulse flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold text-brc-primary tracking-wide text-center">NESTE E-BOOK GRATUITO</span>
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-brc-accent flex-shrink-0" />
             </div>
           </div>
 
-          {/* Título Cinematográfico */}
+          {/* Título Cinematográfico - BRC */}
           <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter px-4">
-            <span className="block text-secondary text-2xl sm:text-2xl md:text-4xl font-light">VOCÊ VAI</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">DESCOBRIR</span>
+            <span className="block text-brc-dark text-2xl sm:text-2xl md:text-4xl font-light">VOCÊ VAI</span>
+            <span className="block title-gradient-brc">DESCOBRIR</span>
           </h2>
         </div>
 
@@ -140,16 +140,16 @@ export function Benefits() {
                 
                 <CardContent className="p-6 relative h-full flex flex-col">
                   
-                  {/* Header com Número */}
+                  {/* Header com Número - BRC Cores Vivas */}
                   <div className="mb-6">
-                    <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent mb-4 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+                    <div className="text-5xl md:text-6xl font-black title-gradient-brc mb-4">
                       {benefit.number}
                     </div>
                   </div>
                   
                   {/* Conteúdo */}
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="text-lg font-bold text-brc-primary mb-3 group-hover:text-brc-secondary transition-colors">
                       {benefit.title}
                     </h3>
                     <p className="text-muted leading-relaxed text-sm">
@@ -157,8 +157,8 @@ export function Benefits() {
                     </p>
                   </div>
                   
-                  {/* Linha Decorativa */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {/* Linha Decorativa BRC */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brc-primary to-brc-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
                 </CardContent>
               </Card>
             </div>

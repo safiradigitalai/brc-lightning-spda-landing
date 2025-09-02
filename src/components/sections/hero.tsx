@@ -105,23 +105,23 @@ export function Hero({ onCtaClick }: HeroProps) {
             {/* Main Content */}
             <div className={`space-y-10 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               
-              {/* Glass Badge Premium */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 surface-glass-strong border border-glass rounded-full shadow-cyan-lg glass-hover max-w-[90vw]">
-                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan animate-pulse flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-bold text-gradient-cyan tracking-wide truncate">GUIA DE SOBREVIVÊNCIA • VOLUME 1</span>
-                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-gradient-cyan flex-shrink-0" />
+              {/* Glass Badge Premium - BRC Sólido */}
+              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-8 py-3 sm:py-4 bg-white border-2 border-brc-primary rounded-full shadow-cyan-lg hover:shadow-glow transition-all duration-300 max-w-[90vw]">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-brc-primary animate-pulse flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-bold text-brc-primary tracking-wide truncate">GUIA DE SOBREVIVÊNCIA • VOLUME 1</span>
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-brc-primary flex-shrink-0" />
               </div>
 
               {/* Cinematic Title */}
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight">
-                  <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent font-black">
+                  <span className="block title-gradient-brc font-black">
                     GUIA DE SOBREVIVÊNCIA
                   </span>
-                  <span className="block text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
+                  <span className="block text-brc-dark text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
                     DO ENGENHEIRO
                   </span>
-                  <span className="block text-primary font-black">
+                  <span className="block text-brc-primary font-black">
                     SPDA
                   </span>
                   <span className="block text-secondary text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mt-2">
@@ -142,7 +142,7 @@ export function Hero({ onCtaClick }: HeroProps) {
               <div className="pt-6">
                 <Button 
                   size="lg" 
-                  className="group h-12 sm:h-16 px-6 sm:px-12 text-sm sm:text-lg font-bold bg-gradient-to-r from-primary via-cyan-400 to-primary text-white hover:from-cyan-400 hover:via-primary hover:to-cyan-400 shadow-[0_0_25px_rgba(0,229,255,0.5)] hover:shadow-[0_0_45px_rgba(0,229,255,0.8)] transition-all duration-500 hover:scale-105 hover:-translate-y-1 cursor-pointer max-w-[90vw]"
+                  className="group btn-gradient-brc h-12 sm:h-16 px-6 sm:px-12 text-sm sm:text-lg font-bold shadow-[0_0_25px_rgba(6,98,161,0.5)] hover:shadow-[0_0_45px_rgba(57,163,199,0.8)] transition-all duration-500 hover:scale-105 hover:-translate-y-1 cursor-pointer max-w-[90vw]"
                   onClick={onCtaClick}
                 >
                   <Download className="w-4 h-4 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-white group-hover:animate-bounce drop-shadow-[0_0_4px_rgba(0,0,0,0.8)] flex-shrink-0" />

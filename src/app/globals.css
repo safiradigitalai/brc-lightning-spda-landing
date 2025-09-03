@@ -8,13 +8,13 @@
   --foreground: #1A202C;
   
   /* Sistema de Azuis BRC - Paleta do Cliente */
-  --primary: #39A3C7;
+  --primary: #0b72b5;
   --primary-foreground: #FFFFFF;
-  --primary-light: #4A90A4;
-  --primary-dark: #0662A1;
-  --primary-vivid: #003F5F;
-  --primary-safira: #003F5F;
-  --primary-centaurea: #003C58;
+  --primary-light: #6dbfe2;
+  --primary-dark: #0b72b5;
+  --primary-vivid: #0b72b5;
+  --primary-safira: #0b72b5;
+  --primary-centaurea: #0b72b5;
   
   /* Cores Complementares Premium */
   --accent: #FF6B47;
@@ -47,17 +47,17 @@
   --text-accent: var(--primary-dark);
   
   /* Borders - Cores sólidas da paleta BRC */
-  --border-glass: rgba(57, 163, 199, 0.6);
-  --border-glass-subtle: rgba(57, 163, 199, 0.4);
+  --border-glass: rgba(11, 114, 181, 0.6);
+  --border-glass-subtle: rgba(11, 114, 181, 0.4);
   --border-neutral: var(--neutral-200);
   
   /* Shadows - Paleta BRC sólida */
-  --shadow-cyan-sm: 0 2px 8px rgba(57, 163, 199, 0.3);
-  --shadow-cyan-md: 0 8px 25px rgba(57, 163, 199, 0.4);
-  --shadow-cyan-lg: 0 16px 40px rgba(6, 98, 161, 0.5);
+  --shadow-cyan-sm: 0 2px 8px rgba(11, 114, 181, 0.3);
+  --shadow-cyan-md: 0 8px 25px rgba(11, 114, 181, 0.4);
+  --shadow-cyan-lg: 0 16px 40px rgba(11, 114, 181, 0.5);
   --shadow-coral-sm: 0 2px 8px rgba(255, 107, 71, 0.15);
   --shadow-neutral: 0 4px 16px rgba(15, 23, 42, 0.2);
-  --shadow-glow: 0 0 32px rgba(57, 163, 199, 0.5);
+  --shadow-glow: 0 0 32px rgba(11, 114, 181, 0.5);
   
   /* Cards Glassmorphism */
   --card-background: var(--surface-glass);
@@ -72,14 +72,14 @@
   --bg-section-1: conic-gradient(from 0deg at 80% 20%, rgba(0, 229, 255, 0.04) 0deg, transparent 60deg, transparent 300deg, rgba(255, 107, 71, 0.03) 360deg),
                   linear-gradient(135deg, var(--neutral-50) 0%, #FFFFFF 50%, var(--neutral-100) 100%);
   
-  --bg-section-2: #00E5FF;
+  --bg-section-2: #0b72b5;
   
   --bg-section-3: linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(0, 229, 255, 0.03) 30%, rgba(0, 229, 255, 0.03) 70%, rgba(0, 229, 255, 0.08) 100%),
                   linear-gradient(45deg, #E6F3FF 0%, #FFFFFF 25%, rgba(0, 229, 255, 0.04) 50%, #FFFFFF 75%, #E6F3FF 100%);
   
   /* Grid Patterns - Paleta BRC */
-  --grid-primary: repeating-linear-gradient(0deg, rgba(57, 163, 199, 0.12) 0px, transparent 1px, transparent 20px, rgba(57, 163, 199, 0.12) 21px),
-                  repeating-linear-gradient(90deg, rgba(57, 163, 199, 0.12) 0px, transparent 1px, transparent 20px, rgba(57, 163, 199, 0.12) 21px);
+  --grid-primary: repeating-linear-gradient(0deg, rgba(11, 114, 181, 0.12) 0px, transparent 1px, transparent 20px, rgba(11, 114, 181, 0.12) 21px),
+                  repeating-linear-gradient(90deg, rgba(11, 114, 181, 0.12) 0px, transparent 1px, transparent 20px, rgba(11, 114, 181, 0.12) 21px);
 }
 
 /* TEMA DARK - Cinematográfico Original */
@@ -142,7 +142,7 @@
   --bg-section-1: conic-gradient(from 0deg at 80% 20%, rgba(0, 229, 255, 0.08) 0deg, transparent 60deg, transparent 300deg, rgba(255, 107, 71, 0.06) 360deg),
                   linear-gradient(135deg, #0F1419 0%, #1A1F2E 50%, #252A3A 100%);
   
-  --bg-section-2: #1A1F2E;
+  --bg-section-2: #0b72b5;
   
   --bg-section-3: linear-gradient(135deg, rgba(0, 229, 255, 0.06) 0%, transparent 30%, transparent 70%, rgba(0, 229, 255, 0.08) 100%),
                   linear-gradient(45deg, #0A0E1A 0%, #1A1F2E 25%, #0F1419 50%, #1A1F2E 75%, #0A0E1A 100%);
@@ -309,18 +309,18 @@ body {
 /* Cards - Completamente sólidos com paleta BRC */
 .light .card-glass {
   background: #FFFFFF;
-  border: 1px solid rgba(57, 163, 199, 0.3);
+  border: 1px solid rgba(11, 114, 181, 0.3);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(57, 163, 199, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(11, 114, 181, 0.2);
 }
 
 .light .card-glass-strong {
   background: #FFFFFF;
-  border: 1px solid rgba(57, 163, 199, 0.4);
+  border: 1px solid rgba(11, 114, 181, 0.4);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 0 25px rgba(6, 98, 161, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 0 25px rgba(11, 114, 181, 0.3);
 }
 
 .dark .card-glass {
@@ -348,14 +348,14 @@ body {
 }
 
 /* Borders - Paleta BRC sólida */
-.light .border-glass { border-color: rgba(57, 163, 199, 0.5); }
-.light .border-glass-subtle { border-color: rgba(57, 163, 199, 0.3); }
+.light .border-glass { border-color: rgba(11, 114, 181, 0.5); }
+.light .border-glass-subtle { border-color: rgba(11, 114, 181, 0.3); }
 
 /* Borders sólidos BRC */
-.border-brc-primary { border-color: #0662A1; }
-.border-brc-secondary { border-color: #39A3C7; }
-.border-brc-accent { border-color: #4A90A4; }
-.border-brc-dark { border-color: #003F5F; }
+.border-brc-primary { border-color: #0b72b5; }
+.border-brc-secondary { border-color: #6dbfe2; }
+.border-brc-accent { border-color: #0b72b5; }
+.border-brc-dark { border-color: #0b72b5; }
 
 .dark .border-glass { border-color: var(--border-glass); }
 .dark .border-glass-subtle { border-color: var(--border-glass-subtle); }
@@ -363,9 +363,9 @@ body {
 .border-neutral { border-color: var(--border-neutral); }
 
 /* Shadows - Paleta BRC mais intensa */
-.light .shadow-cyan { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(57, 163, 199, 0.2); }
-.light .shadow-cyan-lg { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 0 25px rgba(6, 98, 161, 0.3); }
-.light .shadow-glow { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 30px rgba(57, 163, 199, 0.4); }
+.light .shadow-cyan { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px rgba(11, 114, 181, 0.2); }
+.light .shadow-cyan-lg { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 0 25px rgba(11, 114, 181, 0.3); }
+.light .shadow-glow { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 30px rgba(11, 114, 181, 0.4); }
 
 .dark .shadow-cyan { box-shadow: var(--shadow-cyan-md); }
 .dark .shadow-cyan-lg { box-shadow: var(--shadow-cyan-lg); }
@@ -400,12 +400,12 @@ body {
 
 /* Orb Effects - Paleta BRC mais sólida */
 .light .orb-cyan-light {
-  background: radial-gradient(circle, rgba(57, 163, 199, 0.15) 0%, rgba(74, 144, 164, 0.08) 40%, rgba(6, 98, 161, 0.04) 70%);
+  background: radial-gradient(circle, rgba(11, 114, 181, 0.15) 0%, rgba(109, 191, 226, 0.08) 40%, rgba(11, 114, 181, 0.04) 70%);
   filter: blur(2px);
 }
 
 .light .orb-coral-light {
-  background: radial-gradient(circle, rgba(255, 107, 71, 0.1) 0%, rgba(255, 138, 107, 0.05) 40%, rgba(57, 163, 199, 0.02) 70%);
+  background: radial-gradient(circle, rgba(255, 107, 71, 0.1) 0%, rgba(255, 138, 107, 0.05) 40%, rgba(11, 114, 181, 0.02) 70%);
   filter: blur(2px);
 }
 
@@ -447,8 +447,8 @@ body {
 
 .light .glass-hover:hover {
   background: #FFFFFF;
-  border-color: rgba(57, 163, 199, 0.6);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 30px rgba(6, 98, 161, 0.4);
+  border-color: rgba(11, 114, 181, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 30px rgba(11, 114, 181, 0.4);
   transform: translateY(-2px) scale(1.02);
 }
 
@@ -480,7 +480,7 @@ body {
 
 /* Gradient Text - Paleta BRC vibrante */
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #39A3C7 0%, #4A90A4 30%, #0662A1 70%, #003F5F 100%);
+  background: linear-gradient(135deg, #0b72b5 0%, #6dbfe2 30%, #0b72b5 70%, #0b72b5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -497,7 +497,7 @@ body {
 
 /* Classes BRC - Gradients sólidos para botões */
 .btn-gradient-brc {
-  background: linear-gradient(135deg, #39A3C7 0%, #0662A1 50%, #003F5F 100%);
+  background: linear-gradient(135deg, #0b72b5 0%, #6dbfe2 50%, #0b72b5 100%);
   border: none;
   color: #FFFFFF;
   font-weight: bold;
@@ -505,14 +505,14 @@ body {
 }
 
 .btn-gradient-brc:hover {
-  background: linear-gradient(135deg, #4A90A4 0%, #39A3C7 50%, #0662A1 100%);
+  background: linear-gradient(135deg, #6dbfe2 0%, #0b72b5 50%, #0b72b5 100%);
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(6, 98, 161, 0.4), 0 0 20px rgba(57, 163, 199, 0.3);
+  box-shadow: 0 8px 25px rgba(11, 114, 181, 0.4), 0 0 20px rgba(11, 114, 181, 0.3);
 }
 
 /* Títulos com gradients BRC mais vivos */
 .title-gradient-brc {
-  background: linear-gradient(135deg, #0662A1 0%, #39A3C7 30%, #4A90A4 60%, #003F5F 100%);
+  background: linear-gradient(135deg, #0b72b5 0%, #6dbfe2 30%, #0b72b5 60%, #0b72b5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -521,44 +521,44 @@ body {
 }
 
 /* Texto sólido BRC */
-.text-brc-primary { color: #0662A1; }
-.text-brc-secondary { color: #39A3C7; }
-.text-brc-accent { color: #4A90A4; }
-.text-brc-dark { color: #003F5F; }
+.text-brc-primary { color: #0b72b5; }
+.text-brc-secondary { color: #6dbfe2; }
+.text-brc-accent { color: #0b72b5; }
+.text-brc-dark { color: #0b72b5; }
 
 /* Texto BRC específico para modo dark */
 .dark .text-brc-dark { color: #FFFFFF !important; }
 
 /* Backgrounds sólidos BRC */
-.bg-brc-primary { background-color: #0662A1; }
-.bg-brc-secondary { background-color: #39A3C7; }
-.bg-brc-accent { background-color: #4A90A4; }
-.bg-brc-dark { background-color: #003F5F; }
+.bg-brc-primary { background-color: #0b72b5; }
+.bg-brc-secondary { background-color: #6dbfe2; }
+.bg-brc-accent { background-color: #0b72b5; }
+.bg-brc-dark { background-color: #0b72b5; }
 
 /* Particle Effects BRC */
 .light .particle-brc-cyan {
-  background: #39A3C7;
-  box-shadow: 0 0 12px rgba(57, 163, 199, 0.8), 0 0 24px rgba(6, 98, 161, 0.6);
+  background: #6dbfe2;
+  box-shadow: 0 0 12px rgba(109, 191, 226, 0.8), 0 0 24px rgba(11, 114, 181, 0.6);
 }
 
 .light .particle-brc-blue {
-  background: #0662A1;
-  box-shadow: 0 0 10px rgba(6, 98, 161, 0.7), 0 0 20px rgba(0, 63, 95, 0.5);
+  background: #0b72b5;
+  box-shadow: 0 0 10px rgba(11, 114, 181, 0.7), 0 0 20px rgba(11, 114, 181, 0.5);
 }
 
 /* Números super vibrantes BRC */
 .number-brc-glow {
-  background: linear-gradient(135deg, #0662A1 0%, #39A3C7 30%, #4A90A4 60%, #003F5F 100%);
+  background: linear-gradient(135deg, #0b72b5 0%, #6dbfe2 30%, #0b72b5 60%, #0b72b5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   font-weight: 900;
-  text-shadow: 0 0 20px rgba(57, 163, 199, 0.8);
-  filter: drop-shadow(0 0 15px rgba(6, 98, 161, 0.6));
+  text-shadow: 0 0 20px rgba(11, 114, 181, 0.8);
+  filter: drop-shadow(0 0 15px rgba(11, 114, 181, 0.6));
 }
 
 .number-brc-glow:hover {
-  filter: drop-shadow(0 0 25px rgba(57, 163, 199, 0.9));
+  filter: drop-shadow(0 0 25px rgba(11, 114, 181, 0.9));
   transform: scale(1.1);
 }

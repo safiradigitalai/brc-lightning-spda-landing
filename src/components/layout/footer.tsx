@@ -160,8 +160,8 @@ export function Footer() {
 
         {/* Copyright */}
         <div className={`text-center mt-16 pt-8 border-t border-white/20 transition-all duration-1000 delay-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <p className="text-white/60 text-sm">
-            © 2024 BRC Lightning. Todos os direitos reservados. | Engenharia especializada em SPDA
+          <p className="text-white/60 text-sm font-semibold">
+            © 2025 BRC Lightning. Todos os direitos reservados. | Engenharia especializada em SPDA
           </p>
         </div>
       </div>

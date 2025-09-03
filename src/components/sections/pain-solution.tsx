@@ -107,7 +107,7 @@ export function PainSolution() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tighter px-4">
             <span className="block text-secondary text-lg sm:text-xl md:text-2xl lg:text-3xl font-light">SE VOCÊ É ENGENHEIRO ELETRICISTA</span>
             <span className="block text-secondary text-lg sm:text-xl md:text-2xl lg:text-3xl font-light">OU PROJETISTA,</span>
-            <span className="block bg-gradient-to-r from-primary via-cyan-300 to-primary bg-clip-text text-transparent">SABE QUE</span>
+            <span className="block text-brc-primary font-bold">SABE QUE</span>
           </h2>
         </div>
 

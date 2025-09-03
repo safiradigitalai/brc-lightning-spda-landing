@@ -142,7 +142,7 @@
   --bg-section-1: conic-gradient(from 0deg at 80% 20%, rgba(0, 229, 255, 0.08) 0deg, transparent 60deg, transparent 300deg, rgba(255, 107, 71, 0.06) 360deg),
                   linear-gradient(135deg, #0F1419 0%, #1A1F2E 50%, #252A3A 100%);
   
-  --bg-section-2: #0b72b5;
+  --bg-section-2: #1A1F2E;
   
   --bg-section-3: linear-gradient(135deg, rgba(0, 229, 255, 0.06) 0%, transparent 30%, transparent 70%, rgba(0, 229, 255, 0.08) 100%),
                   linear-gradient(45deg, #0A0E1A 0%, #1A1F2E 25%, #0F1419 50%, #1A1F2E 75%, #0A0E1A 100%);
@@ -528,6 +528,7 @@ body {
 
 /* Texto BRC específico para modo dark */
 .dark .text-brc-dark { color: #FFFFFF !important; }
+.dark .text-brc-primary { color: #00E5FF !important; }
 
 /* Backgrounds sólidos BRC */
 .bg-brc-primary { background-color: #0b72b5; }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Lead } from '@/lib/models/Lead';
 import { validateLead, leadQuerySchema } from '@/lib/validators/leadValidator';
+import { KommoService } from '@/lib/services/kommo';
 
 // Next.js 15 runtime configuration for Node.js APIs
 export const runtime = 'nodejs';
@@ -113,13 +114,30 @@ export async function POST(request: NextRequest) {
     // Criar novo lead
     const newLead = await Lead.create(validation.data);
 
+    // Tentar enviar para Kommo CRM
+    let kommoResult = null;
+    try {
+      console.log('Enviando lead para Kommo CRM...');
+      kommoResult = await KommoService.createLead(newLead);
+
+      if (kommoResult.success) {
+        console.log('Lead enviado para Kommo com sucesso:', kommoResult.kommoLeadId);
+      } else {
+        console.error('Erro ao enviar para Kommo:', kommoResult.error);
+      }
+    } catch (error) {
+      console.error('Erro crítico ao integrar com Kommo:', error);
+      // Não falhar a criação do lead se Kommo falhar
+    }
+
     return NextResponse.json({
       success: true,
       data: {
         leadId: newLead.id,
         email: newLead.email,
         name: newLead.name,
-        isExisting: false
+        isExisting: false,
+        kommo: kommoResult
       },
       message: 'Lead criado com sucesso'
     }, { status: 201 });

@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { KommoService } from '@/lib/services/kommo';
 
 export const runtime = 'nodejs';
 
 // GET /api/kommo/test - Testar conexão com Kommo
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log('Testando conexão com Kommo...');
 
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
 }
 
 // POST /api/kommo/test - Testar criação de lead no Kommo
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     console.log('Testando criação de lead no Kommo...');
 

@@ -61,8 +61,15 @@ interface KommoContactResponse {
   };
 }
 
-// Cache para IDs de campos customizados
-let customFieldsCache: { [key: string]: number } | null = null;
+// Interface para campos customizados
+interface KommoCustomField {
+  id: number;
+  name: string;
+  code?: string;
+}
+
+// Cache para IDs de campos customizados (comentado pois não está sendo usado)
+// let customFieldsCache: { [key: string]: number } | null = null;
 
 export class KommoService {
   private static getHeaders() {
@@ -93,7 +100,7 @@ export class KommoService {
       const customFields = data._embedded?.custom_fields || [];
 
       // Mapear códigos de campo para IDs e nome dos campos
-      const fieldMap = customFields.reduce((acc: { [key: string]: number }, field: any) => {
+      const fieldMap = customFields.reduce((acc: { [key: string]: number }, field: KommoCustomField) => {
         if (field.code) {
           acc[field.code] = field.id;
         }
@@ -105,7 +112,7 @@ export class KommoService {
       }, {});
 
       console.log('📋 Campos customizados encontrados:', fieldMap);
-      customFieldsCache = fieldMap;
+      // customFieldsCache = fieldMap; // Comentado pois a variável não está sendo usada
       return fieldMap;
     } catch (error) {
       console.error('Erro ao buscar campos customizados:', error);
@@ -307,7 +314,10 @@ export class KommoService {
         // Criar contato primeiro
         const contactPayload = [{
           name: leadData.name,
-          custom_fields_values: []
+          custom_fields_values: [] as Array<{
+            field_id: number;
+            values: Array<{ value: string }>;
+          }>
         }];
 
         // Adicionar WhatsApp se fornecido
